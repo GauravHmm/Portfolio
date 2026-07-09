@@ -1,0 +1,614 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Resume — Gauravsingh Rajpurohit</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+    rel="stylesheet" />
+  <style>
+    *,
+    *::before,
+    *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --text: #1a1a1a;
+      --text-secondary: #444444;
+      --text-dim: #777777;
+      --border: #d4d4d4;
+      --bg: #ffffff;
+      --surface: #f7f7f7;
+      --accent: #2a2a2a;
+    }
+
+    html {
+      font-size: 13px;
+    }
+
+    body {
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+      background: #eee;
+      color: var(--text);
+      line-height: 1.5;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── Page wrapper (A4 simulation) ── */
+    .resume-page {
+      width: 210mm;
+      min-height: 297mm;
+      background: var(--bg);
+      margin: 1.5rem auto;
+      padding: 2rem 2.2rem;
+      box-shadow: 0 2px 24px rgba(0, 0, 0, 0.15);
+      border-radius: 2px;
+    }
+
+    /* ── Header ── */
+    .resume-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 1.2rem;
+      padding-bottom: 1rem;
+      border-bottom: 2px solid var(--accent);
+    }
+
+    .resume-name {
+      font-size: 2rem;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      line-height: 1.1;
+      color: var(--text);
+    }
+
+    .resume-role {
+      font-size: 0.92rem;
+      font-weight: 500;
+      color: var(--text-secondary);
+      margin-top: 0.2rem;
+    }
+
+    .resume-contact {
+      text-align: right;
+      font-size: 0.78rem;
+      color: var(--text-secondary);
+      line-height: 1.7;
+    }
+
+    .resume-contact a {
+      color: var(--text-secondary);
+      text-decoration: none;
+    }
+
+    .resume-contact a:hover {
+      color: var(--text);
+    }
+
+    .resume-contact .contact-icon {
+      display: inline-block;
+      width: 12px;
+      margin-right: 0.2rem;
+      text-align: center;
+      color: var(--text-dim);
+    }
+
+    /* ── Two column body ── */
+    .resume-body {
+      display: grid;
+      grid-template-columns: 1fr 190px;
+      gap: 1.8rem;
+    }
+
+    /* ── Section titles ── */
+    .r-section {
+      margin-bottom: 1rem;
+    }
+
+    .r-section-title {
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.13em;
+      color: var(--accent);
+      margin-bottom: 0.55rem;
+      padding-bottom: 0.3rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    /* ── Summary ── */
+    .r-summary {
+      font-size: 0.82rem;
+      color: var(--text-secondary);
+      line-height: 1.65;
+    }
+
+    /* ── Project entries ── */
+    .r-project {
+      margin-bottom: 0.7rem;
+    }
+
+    .r-project-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      margin-bottom: 0.15rem;
+    }
+
+    .r-project-name {
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: var(--text);
+    }
+
+    .r-project-tech-inline {
+      font-size: 0.68rem;
+      font-weight: 500;
+      color: var(--text-dim);
+      font-style: italic;
+    }
+
+    .r-project-bullets {
+      list-style: none;
+      padding: 0;
+    }
+
+    .r-project-bullets li {
+      font-size: 0.78rem;
+      color: var(--text-secondary);
+      line-height: 1.55;
+      padding-left: 0.75rem;
+      position: relative;
+      margin-bottom: 0.1rem;
+    }
+
+    .r-project-bullets li::before {
+      content: '▸';
+      position: absolute;
+      left: 0;
+      color: var(--text-dim);
+      font-size: 0.65rem;
+      top: 0.1rem;
+    }
+
+    /* ── Education ── */
+    .r-edu-degree {
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: var(--text);
+    }
+
+    .r-edu-school {
+      font-size: 0.78rem;
+      color: var(--text-secondary);
+    }
+
+    .r-edu-year {
+      font-size: 0.72rem;
+      color: var(--text-dim);
+    }
+
+    .r-edu-note {
+      font-size: 0.75rem;
+      color: var(--text-secondary);
+      margin-top: 0.2rem;
+      font-style: italic;
+    }
+
+    /* ── Right column: Skills, Coursework, etc ── */
+    .r-skills-group {
+      margin-bottom: 0.8rem;
+    }
+
+    .r-skills-label {
+      font-size: 0.62rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--text-dim);
+      margin-bottom: 0.35rem;
+    }
+
+    .r-skills-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.25rem;
+    }
+
+    .r-skill-tag {
+      font-size: 0.7rem;
+      font-weight: 500;
+      color: var(--text-secondary);
+      background: var(--surface);
+      border: 1px solid #e2e2e2;
+      padding: 0.18rem 0.45rem;
+      border-radius: 3px;
+    }
+
+    .r-coursework-item {
+      font-size: 0.75rem;
+      color: var(--text-secondary);
+      margin-bottom: 0.15rem;
+    }
+
+    .r-coursework-item.current {
+      color: var(--text);
+      font-weight: 500;
+    }
+
+    .r-coursework-item.current::after {
+      content: ' (current)';
+      font-weight: 400;
+      font-size: 0.65rem;
+      color: var(--text-dim);
+    }
+
+    .r-languages {
+      font-size: 0.75rem;
+      color: var(--text-secondary);
+      line-height: 1.6;
+    }
+
+    /* ── Top toolbar (screen only) ── */
+    .toolbar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 48px;
+      background: #1a1a1a;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.75rem;
+      z-index: 100;
+    }
+
+    .toolbar-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-family: 'Inter', system-ui, sans-serif;
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: #ccc;
+      background: transparent;
+      border: 1px solid #333;
+      border-radius: 5px;
+      padding: 0.4rem 0.9rem;
+      cursor: pointer;
+      transition: all 0.2s;
+      text-decoration: none;
+    }
+
+    .toolbar-btn:hover {
+      color: #fff;
+      border-color: #555;
+      background: #2a2a2a;
+    }
+
+    .toolbar-btn svg {
+      width: 14px;
+      height: 14px;
+      stroke: currentColor;
+      fill: none;
+      stroke-width: 2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .toolbar-divider {
+      width: 1px;
+      height: 20px;
+      background: #333;
+    }
+
+    .toolbar-hint {
+      font-size: 0.68rem;
+      color: #666;
+      font-weight: 400;
+    }
+
+    /* Push content below toolbar */
+    body {
+      padding-top: 48px;
+    }
+
+    /* ── Print ── */
+    @media print {
+      * {
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+      }
+
+      html {
+        font-size: 12px;
+      }
+
+      body {
+        background: #fff;
+        padding-top: 0;
+      }
+
+      .toolbar {
+        display: none !important;
+      }
+
+      .resume-page {
+        width: 100%;
+        margin: 0;
+        padding: 0;
+        box-shadow: none;
+        border-radius: 0;
+        min-height: auto;
+      }
+
+      .r-project {
+        break-inside: avoid;
+        page-break-inside: avoid;
+      }
+
+      @page {
+        size: A4;
+        margin: 1.5cm 1.5cm;
+      }
+    }
+
+    /* ── Responsive (small screens) ── */
+    @media screen and (max-width: 860px) {
+      .resume-page {
+        width: 100%;
+        margin: 0;
+        padding: 1.5rem 1.2rem;
+        border-radius: 0;
+        box-shadow: none;
+        min-height: auto;
+      }
+
+      .resume-body {
+        grid-template-columns: 1fr;
+        gap: 1.2rem;
+      }
+
+      .resume-header {
+        flex-direction: column;
+        gap: 0.75rem;
+      }
+
+      .resume-contact {
+        text-align: left;
+      }
+
+      body {
+        background: #fff;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- ── Screen-only toolbar ── -->
+  <div class="toolbar">
+    <button class="toolbar-btn" onclick="window.print()">
+      <svg viewBox="0 0 24 24">
+        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+        <polyline points="7 10 12 15 17 10" />
+        <line x1="12" y1="15" x2="12" y2="3" />
+      </svg>
+      Save as PDF
+    </button>
+    <div class="toolbar-divider"></div>
+    <a class="toolbar-btn" href="portfolio.html">
+      <svg viewBox="0 0 24 24">
+        <line x1="19" y1="12" x2="5" y2="12" />
+        <polyline points="12 19 5 12 12 5" />
+      </svg>
+      Back to Portfolio
+    </a>
+    <div class="toolbar-divider"></div>
+    <span class="toolbar-hint">Ctrl + P → "Save as PDF"</span>
+  </div>
+
+  <!-- ── Resume ── -->
+  <div class="resume-page">
+
+    <!-- Header -->
+    <header class="resume-header">
+      <div>
+        <h1 class="resume-name">Gauravsingh Rajpurohit</h1>
+        <p class="resume-role">Software Engineer · Full Stack Developer</p>
+      </div>
+      <div class="resume-contact">
+        <span class="contact-icon">✉</span> gauravrajpurohit2006@gmail.com<br>
+        <span class="contact-icon">☎</span> +91 7506631555<br>
+        <span class="contact-icon">⌂</span> <a href="https://github.com/GauravHmm" target="_blank">github.com/GauravHmm</a><br>
+        <span class="contact-icon">in</span> <a href="https://www.linkedin.com/in/gauravsingh-rajpurohit-47409332b" target="_blank">linkedin.com/in/gauravsingh-rajpurohit</a><br>
+        Vellore, Tamil Nadu
+      </div>
+    </header>
+
+    <!-- Body -->
+    <div class="resume-body">
+
+      <!-- LEFT: Main content -->
+      <div class="resume-main">
+
+        <!-- Summary -->
+        <div class="r-section">
+          <h2 class="r-section-title">Summary</h2>
+          <p class="r-summary">
+            Third-year Computer Science student at VIT with strong foundations in programming, data structures,
+            algorithms, and object-oriented design. Experienced in building full-stack web applications and
+            backend systems using React, Next.js, FastAPI, and Python. Quick learner who enjoys solving problems,
+            exploring new technologies, and turning ideas into working software.
+          </p>
+        </div>
+
+        <!-- Projects -->
+        <div class="r-section">
+          <h2 class="r-section-title">Projects</h2>
+
+          <div class="r-project">
+            <div class="r-project-header">
+              <span class="r-project-name">PRP Indoor Navigation System</span>
+              <span class="r-project-tech-inline">Next.js, TypeScript, A*, Dijkstra, SVG</span>
+            </div>
+            <ul class="r-project-bullets">
+              <li>Built a web-based indoor navigation system for a multi-block academic building using graph algorithms and OOP principles</li>
+              <li>Implemented A* for shortest path and Dijkstra for nearest facility search</li>
+              <li>Designed interactive SVG maps with zoom, pan, and multi-floor navigation</li>
+              <li>Deployed to Vercel cloud with CI/CD pipeline</li>
+            </ul>
+          </div>
+
+          <div class="r-project">
+            <div class="r-project-header">
+              <span class="r-project-name">InsightRush</span>
+              <span class="r-project-tech-inline">FastAPI, DuckDB, Python</span>
+            </div>
+            <ul class="r-project-bullets">
+              <li>Developed backend APIs for CSV ingestion and analytical query execution in a hackathon project</li>
+              <li>Built approximate query-processing pipeline using sampling and statistical estimation for COUNT, SUM, AVG</li>
+              <li>Implemented schema and query validation for safe and consistent data processing</li>
+            </ul>
+          </div>
+
+          <div class="r-project">
+            <div class="r-project-header">
+              <span class="r-project-name">Vedic Wellness</span>
+              <span class="r-project-tech-inline">Next.js, TypeScript, PostgreSQL, Prisma</span>
+            </div>
+            <ul class="r-project-bullets">
+              <li>Designed full-stack e-commerce architecture with authentication, RBAC, OTP verification, and rate limiting</li>
+              <li>Built product catalog, cart, and order workflows with Prisma ORM</li>
+            </ul>
+          </div>
+
+          <div class="r-project">
+            <div class="r-project-header">
+              <span class="r-project-name">PayParse</span>
+              <span class="r-project-tech-inline">Python, Pandas, BeautifulSoup, FastAPI</span>
+            </div>
+            <ul class="r-project-bullets">
+              <li>Built HTML parsing pipeline to extract and structure Google Pay transaction data</li>
+              <li>Designed merchant enrichment via Google Places API with fuzzy matching and caching</li>
+            </ul>
+          </div>
+
+          <div class="r-project">
+            <div class="r-project-header">
+              <span class="r-project-name">Lumi</span>
+              <span class="r-project-tech-inline">Python, Flask, SQLite, Matplotlib</span>
+            </div>
+            <ul class="r-project-bullets">
+              <li>Built full-stack health & productivity tracker with EMA-based habit scoring</li>
+              <li>Integrated AI-based routine analysis with server-side chart generation</li>
+            </ul>
+          </div>
+
+          <div class="r-project">
+            <div class="r-project-header">
+              <span class="r-project-name">Hybrid CNN-PCA Face Recognition</span>
+              <span class="r-project-tech-inline">Python, TensorFlow, OpenCV, SVM</span>
+            </div>
+            <ul class="r-project-bullets">
+              <li>Used MobileNetV2 for feature extraction with PCA for dimensionality reduction</li>
+              <li>Achieved ~92% recognition accuracy with optimized SVM classification pipeline</li>
+            </ul>
+          </div>
+
+          <div class="r-project">
+            <div class="r-project-header">
+              <span class="r-project-name">6502 Emulator</span>
+              <span class="r-project-tech-inline">Python, Systems Programming</span>
+            </div>
+            <ul class="r-project-bullets">
+              <li>Built a software emulator for the MOS 6502 microprocessor with instruction decoding and memory mapping</li>
+            </ul>
+          </div>
+
+        </div>
+
+        <!-- Education -->
+        <div class="r-section">
+          <h2 class="r-section-title">Education</h2>
+          <p class="r-edu-degree">B.Tech in Computer Science and Engineering</p>
+          <p class="r-edu-school">Vellore Institute of Technology (VIT), Vellore</p>
+          <p class="r-edu-year">2024 – 2028</p>
+          <p class="r-edu-note">Strong academic performance in programming and CS core subjects</p>
+        </div>
+
+      </div>
+
+      <!-- RIGHT: Skills sidebar -->
+      <aside class="resume-sidebar">
+
+        <div class="r-section">
+          <h2 class="r-section-title">Skills</h2>
+
+          <div class="r-skills-group">
+            <p class="r-skills-label">Languages</p>
+            <div class="r-skills-list">
+              <span class="r-skill-tag">Python</span>
+              <span class="r-skill-tag">C++</span>
+              <span class="r-skill-tag">JavaScript</span>
+              <span class="r-skill-tag">TypeScript</span>
+            </div>
+          </div>
+
+          <div class="r-skills-group">
+            <p class="r-skills-label">Frameworks</p>
+            <div class="r-skills-list">
+              <span class="r-skill-tag">React</span>
+              <span class="r-skill-tag">Next.js</span>
+              <span class="r-skill-tag">Node.js</span>
+              <span class="r-skill-tag">FastAPI</span>
+              <span class="r-skill-tag">Flask</span>
+            </div>
+          </div>
+
+          <div class="r-skills-group">
+            <p class="r-skills-label">Tools & Concepts</p>
+            <div class="r-skills-list">
+              <span class="r-skill-tag">Git</span>
+              <span class="r-skill-tag">Linux</span>
+              <span class="r-skill-tag">OOP</span>
+              <span class="r-skill-tag">DSA</span>
+              <span class="r-skill-tag">Tailwind CSS</span>
+              <span class="r-skill-tag">PostgreSQL</span>
+              <span class="r-skill-tag">SQLite</span>
+              <span class="r-skill-tag">Prisma</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="r-section">
+          <h2 class="r-section-title">Coursework</h2>
+          <p class="r-coursework-item">Data Structures & Algorithms</p>
+          <p class="r-coursework-item">Object-Oriented Programming</p>
+          <p class="r-coursework-item">Discrete Mathematics</p>
+          <p class="r-coursework-item current">Operating Systems</p>
+          <p class="r-coursework-item current">Computer Networks</p>
+        </div>
+
+        <div class="r-section">
+          <h2 class="r-section-title">Languages</h2>
+          <p class="r-languages">English · Hindi · French</p>
+        </div>
+
+      </aside>
+
+    </div>
+  </div>
+
+</body>
+
+</html>

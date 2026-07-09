@@ -1,0 +1,973 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Gauravsingh Rajpurohit — Developer</title>
+  <meta name="description" content="Resume of Gauravsingh Rajpurohit — Software Engineer & Full Stack Developer, VIT Vellore." />
+  <link rel="icon" href="/icon.svg" type="image/svg+xml" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap"
+    rel="stylesheet" />
+  <style>
+    *,
+    *::before,
+    *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --bg: #111111;
+      --surface: #191919;
+      --border: #2a2a2a;
+      --text: #e8e8e8;
+      --text-secondary: #a0a0a0;
+      --text-dim: #666666;
+      --accent: #888888;
+      --link: #c0c0c0;
+      --nav-height: 52px;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      scroll-padding-top: calc(var(--nav-height) + 1.5rem);
+    }
+
+    body {
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      cursor: none;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── Custom cursor ── */
+    .cursor {
+      position: fixed;
+      width: 8px;
+      height: 8px;
+      background: var(--text-secondary);
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 9999;
+      transform: translate(-50%, -50%);
+      transition: opacity 0.2s;
+    }
+
+    a,
+    button,
+    a *,
+    button * {
+      cursor: pointer !important;
+    }
+
+    /* ── Navigation Bar ── */
+    .navbar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: var(--nav-height);
+      background: rgba(17, 17, 17, 0.82);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border);
+      z-index: 1000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0 2rem;
+    }
+
+    .nav-inner {
+      max-width: 1200px;
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .nav-brand {
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: var(--text);
+      text-decoration: none;
+      letter-spacing: -0.02em;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 0.25rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-size: 0.72rem;
+      font-weight: 500;
+      color: var(--text-dim);
+      text-decoration: none;
+      padding: 0.4rem 0.75rem;
+      border-radius: 5px;
+      transition: color 0.2s, background 0.2s;
+      letter-spacing: 0.01em;
+    }
+
+    .nav-links a:hover {
+      color: var(--text-secondary);
+      background: rgba(255, 255, 255, 0.04);
+    }
+
+    .nav-links a.active {
+      color: var(--text);
+      background: rgba(255, 255, 255, 0.07);
+    }
+
+    .nav-hamburger {
+      display: none;
+      background: none;
+      border: none;
+      color: var(--text-secondary);
+      padding: 0.4rem;
+    }
+
+    .nav-hamburger svg {
+      width: 20px;
+      height: 20px;
+      stroke: currentColor;
+      fill: none;
+      stroke-width: 2;
+    }
+
+    /* ── Layout ── */
+    .page {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: calc(var(--nav-height) + 2.5rem) 3rem 4rem;
+      min-height: 100vh;
+      display: grid;
+      grid-template-columns: 300px 1fr;
+      gap: 4rem;
+    }
+
+    /* ── LEFT COLUMN ── */
+    .sidebar {
+      position: sticky;
+      top: calc(var(--nav-height) + 2.5rem);
+      align-self: start;
+    }
+
+    .name {
+      font-size: 1.75rem;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      line-height: 1.15;
+      margin-bottom: 0.25rem;
+    }
+
+    .role {
+      font-size: 0.9rem;
+      font-weight: 500;
+      color: var(--text-secondary);
+      margin-bottom: 2rem;
+    }
+
+    .sidebar-section {
+      margin-bottom: 2rem;
+    }
+
+    .sidebar-label {
+      font-size: 0.65rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      color: var(--text-dim);
+      margin-bottom: 0.75rem;
+    }
+
+    .contact-list {
+      list-style: none;
+    }
+
+    .contact-list li {
+      margin-bottom: 0.4rem;
+    }
+
+    .contact-list a {
+      color: var(--text-secondary);
+      text-decoration: none;
+      font-size: 0.82rem;
+      font-weight: 400;
+      transition: color 0.2s;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    .contact-list a:hover {
+      color: var(--text);
+    }
+
+    .contact-list .label {
+      color: var(--text-dim);
+      font-size: 0.72rem;
+      font-weight: 600;
+      width: 50px;
+      flex-shrink: 0;
+    }
+
+    .skills-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+    }
+
+    .skill {
+      font-size: 0.72rem;
+      font-weight: 500;
+      color: var(--text-secondary);
+      padding: 0.3rem 0.65rem;
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      transition: border-color 0.2s, color 0.2s;
+    }
+
+    .skill:hover {
+      border-color: #444;
+      color: var(--text);
+    }
+
+    .languages-text {
+      font-size: 0.82rem;
+      color: var(--text-secondary);
+      line-height: 1.6;
+    }
+
+    /* ── RIGHT COLUMN ── */
+    .main {
+      padding-top: 0.25rem;
+    }
+
+    .section {
+      margin-bottom: 2.75rem;
+    }
+
+    .section-title {
+      font-size: 0.65rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      color: var(--text-dim);
+      margin-bottom: 1rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    /* About */
+    .about-text {
+      font-size: 0.9rem;
+      color: var(--text-secondary);
+      line-height: 1.8;
+      max-width: 600px;
+    }
+
+    /* Projects */
+    .projects-grid {
+      display: grid;
+      gap: 0.75rem;
+    }
+
+    .project {
+      padding: 1.25rem;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      transition: border-color 0.25s, transform 0.25s;
+    }
+
+    .project:hover {
+      border-color: #444;
+      transform: translateY(-1px);
+    }
+
+    .project-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 0.5rem;
+      gap: 0.75rem;
+    }
+
+    .project-name {
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--text);
+    }
+
+    .featured-tag {
+      font-size: 0.58rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--accent);
+      border: 1px solid var(--border);
+      padding: 0.15rem 0.5rem;
+      border-radius: 3px;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+
+    .project-desc {
+      font-size: 0.82rem;
+      color: var(--text-secondary);
+      line-height: 1.65;
+      margin-bottom: 0.75rem;
+    }
+
+    .project-desc ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    .project-desc li {
+      padding-left: 0.8rem;
+      position: relative;
+      margin-bottom: 0.2rem;
+    }
+
+    .project-desc li::before {
+      content: '·';
+      position: absolute;
+      left: 0;
+      color: var(--text-dim);
+      font-weight: 700;
+    }
+
+    .project-tech {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.3rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .project-tech span {
+      font-size: 0.65rem;
+      font-weight: 600;
+      color: var(--text-dim);
+      background: var(--surface);
+      border: 1px solid var(--border);
+      padding: 0.15rem 0.45rem;
+      border-radius: 3px;
+    }
+
+    .project-links {
+      display: flex;
+      gap: 0.75rem;
+    }
+
+    .project-links a {
+      font-size: 0.78rem;
+      font-weight: 600;
+      color: var(--text-secondary);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .project-links a:hover {
+      color: var(--text);
+    }
+
+    .project-links a::after {
+      content: ' →';
+      font-size: 0.7rem;
+    }
+
+    /* Education */
+    .edu-item {
+      margin-bottom: 0.75rem;
+    }
+
+    .edu-degree {
+      font-size: 0.9rem;
+      font-weight: 700;
+      color: var(--text);
+    }
+
+    .edu-school {
+      font-size: 0.82rem;
+      color: var(--text-secondary);
+    }
+
+    .edu-year {
+      font-size: 0.75rem;
+      color: var(--text-dim);
+    }
+
+    /* Coursework */
+    .coursework-list {
+      list-style: none;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+    }
+
+    .coursework-item {
+      font-size: 0.72rem;
+      font-weight: 500;
+      color: var(--text-secondary);
+      padding: 0.3rem 0.65rem;
+      border: 1px solid var(--border);
+      border-radius: 4px;
+    }
+
+    .coursework-item.current {
+      border-color: #3a3a3a;
+      color: var(--text);
+    }
+
+    .coursework-label {
+      font-size: 0.65rem;
+      font-weight: 600;
+      color: var(--text-dim);
+      display: block;
+      margin-bottom: 0.5rem;
+    }
+
+    /* Achievements */
+    .achievements-text {
+      font-size: 0.82rem;
+      color: var(--text-secondary);
+      line-height: 1.6;
+    }
+
+    /* Export Button */
+    .export-btn {
+      position: fixed;
+      bottom: 1.5rem;
+      right: 1.5rem;
+      z-index: 100;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+      font-family: 'Inter', system-ui, sans-serif;
+      font-size: 0.72rem;
+      font-weight: 600;
+      color: var(--text-secondary);
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 0.5rem 1rem;
+      transition: border-color 0.25s, color 0.25s, background 0.25s;
+      cursor: pointer;
+      letter-spacing: 0.02em;
+    }
+
+    .export-btn:hover {
+      border-color: #555;
+      color: var(--text);
+      background: var(--surface);
+    }
+
+    .export-btn svg {
+      width: 14px;
+      height: 14px;
+      stroke: currentColor;
+      fill: none;
+      stroke-width: 2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    /* ── Footer ── */
+    .footer-badge {
+      position: fixed;
+      bottom: 1.5rem;
+      left: 1.5rem;
+      font-size: 0.65rem;
+      color: var(--text-dim);
+      line-height: 1.5;
+    }
+
+    .footer-badge strong {
+      font-weight: 600;
+      color: var(--text-secondary);
+    }
+
+    /* ── Responsive ── */
+    @media (max-width: 860px) {
+      .page {
+        grid-template-columns: 1fr;
+        gap: 2.5rem;
+        padding: calc(var(--nav-height) + 1.5rem) 1.5rem 2.5rem;
+      }
+
+      .sidebar {
+        position: static;
+      }
+
+      .name {
+        font-size: 1.5rem;
+      }
+
+      body {
+        cursor: auto;
+      }
+
+      .cursor {
+        display: none;
+      }
+
+      .footer-badge {
+        position: static;
+        padding: 2rem 0 1rem;
+        text-align: center;
+      }
+
+      .nav-links {
+        display: none;
+        position: absolute;
+        top: var(--nav-height);
+        left: 0;
+        right: 0;
+        flex-direction: column;
+        background: rgba(17, 17, 17, 0.96);
+        backdrop-filter: blur(16px);
+        border-bottom: 1px solid var(--border);
+        padding: 0.5rem;
+        gap: 0;
+      }
+
+      .nav-links.open {
+        display: flex;
+      }
+
+      .nav-links a {
+        padding: 0.65rem 1rem;
+        font-size: 0.82rem;
+      }
+
+      .nav-hamburger {
+        display: block;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .page {
+        padding: calc(var(--nav-height) + 1rem) 1rem 2rem;
+      }
+
+      .project {
+        padding: 1rem;
+      }
+    }
+
+    /* ── Print / PDF Export ── */
+    @media print {
+      * {
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+      }
+
+      html,
+      body {
+        background: #fff !important;
+        color: #111 !important;
+        cursor: auto !important;
+        font-size: 10px;
+      }
+
+      :root {
+        --bg: #ffffff;
+        --surface: #f5f5f5;
+        --border: #d0d0d0;
+        --text: #111111;
+        --text-secondary: #444444;
+        --text-dim: #777777;
+        --accent: #555555;
+        --link: #333333;
+      }
+
+      .cursor,
+      .footer-badge,
+      .export-btn,
+      .navbar {
+        display: none !important;
+      }
+
+      .page {
+        max-width: 100%;
+        padding: 0;
+        margin: 0;
+        gap: 1.5rem;
+        grid-template-columns: 240px 1fr;
+        min-height: auto;
+      }
+
+      .sidebar {
+        position: static;
+      }
+
+      .section {
+        margin-bottom: 1.25rem;
+      }
+
+      .project {
+        border: 1px solid #d0d0d0;
+        break-inside: avoid;
+        page-break-inside: avoid;
+        padding: 0.8rem;
+        margin-bottom: 0.4rem;
+      }
+
+      .project:hover {
+        transform: none;
+      }
+
+      .project-links a::after {
+        content: none;
+      }
+
+      a {
+        color: #333 !important;
+        text-decoration: none;
+      }
+
+      .name {
+        font-size: 1.35rem;
+      }
+
+      .section-title {
+        margin-bottom: 0.6rem;
+        padding-bottom: 0.3rem;
+      }
+
+      .sidebar-section {
+        margin-bottom: 1.25rem;
+      }
+
+      @page {
+        size: A4;
+        margin: 1.2cm;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="cursor" id="cursor"></div>
+
+  <!-- ── Navigation ── -->
+  <nav class="navbar" id="navbar">
+    <div class="nav-inner">
+      <a href="#" class="nav-brand">GR</a>
+      <button class="nav-hamburger" id="navToggle" aria-label="Toggle navigation">
+        <svg viewBox="0 0 24 24">
+          <line x1="3" y1="6" x2="21" y2="6" />
+          <line x1="3" y1="12" x2="21" y2="12" />
+          <line x1="3" y1="18" x2="21" y2="18" />
+        </svg>
+      </button>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="#about">About</a></li>
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#education">Education</a></li>
+        <li><a href="#coursework">Coursework</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <div class="page">
+    <!-- LEFT COLUMN -->
+    <aside class="sidebar">
+      <h1 class="name">Gauravsingh<br>Rajpurohit</h1>
+      <p class="role">Software Engineer · Full Stack Developer</p>
+
+      <div class="sidebar-section">
+        <p class="sidebar-label">Contact</p>
+        <ul class="contact-list">
+          <li>
+            <a href="mailto:gauravrajpurohit2006@gmail.com">
+              <span class="label">Email</span> gauravrajpurohit2006@gmail.com
+            </a>
+          </li>
+          <li>
+            <a href="tel:+917506631555">
+              <span class="label">Phone</span> 7506631555
+            </a>
+          </li>
+          <li>
+            <a href="https://github.com/GauravHmm" target="_blank" rel="noopener">
+              <span class="label">GitHub</span> GauravHmm
+            </a>
+          </li>
+          <li>
+            <a href="https://www.linkedin.com/in/gauravsingh-rajpurohit-47409332b" target="_blank" rel="noopener">
+              <span class="label">LinkedIn</span> gauravsingh-rajpurohit
+            </a>
+          </li>
+          <li>
+            <span class="label" style="color: var(--text-dim); font-size: 0.72rem; font-weight: 600;">Location</span>
+            <span style="font-size: 0.82rem; color: var(--text-secondary);">Vellore, Tamil Nadu</span>
+          </li>
+        </ul>
+      </div>
+
+      <div class="sidebar-section">
+        <p class="sidebar-label">Skills</p>
+        <div class="skills-list">
+          <span class="skill">Python</span>
+          <span class="skill">C++</span>
+          <span class="skill">JavaScript</span>
+          <span class="skill">TypeScript</span>
+          <span class="skill">React</span>
+          <span class="skill">Next.js</span>
+          <span class="skill">Node.js</span>
+          <span class="skill">FastAPI</span>
+          <span class="skill">Flask</span>
+          <span class="skill">Tailwind CSS</span>
+          <span class="skill">OOP</span>
+          <span class="skill">DSA</span>
+          <span class="skill">Git</span>
+          <span class="skill">Linux</span>
+          <span class="skill">SVG / Canvas</span>
+        </div>
+      </div>
+
+      <div class="sidebar-section">
+        <p class="sidebar-label">Languages</p>
+        <p class="languages-text">English · Hindi · French</p>
+      </div>
+    </aside>
+
+    <!-- RIGHT COLUMN -->
+    <main class="main">
+      <!-- About -->
+      <section class="section" id="about">
+        <h2 class="section-title">About</h2>
+        <p class="about-text">
+          Third-year Computer Science student at VIT with strong foundations in programming,
+          data structures, algorithms, and object-oriented design. Experienced in building
+          full-stack web applications and backend systems using React, Next.js, FastAPI, and
+          Python. Quick learner who enjoys solving problems, exploring new technologies, and
+          turning ideas into working software. Currently expanding into systems-level topics
+          including operating systems and computer networking.
+        </p>
+      </section>
+
+      <!-- Projects -->
+      <section class="section" id="projects">
+        <h2 class="section-title">Projects</h2>
+        <div class="projects-grid">
+
+          <!-- PRP Indoor Navigation -->
+          <div class="project">
+            <div class="project-top">
+              <h3 class="project-name">PRP Indoor Navigation System</h3>
+              <span class="featured-tag">Featured</span>
+            </div>
+            <div class="project-desc">
+              <ul>
+                <li>Built a scalable, cloud-deployable web-based indoor navigation system for a multi-block academic
+                  building using graph algorithms and object-oriented design principles.</li>
+                <li>Implemented A* for shortest path and Dijkstra for nearest facility search, demonstrating strong
+                  algorithmic problem-solving and debugging skills.</li>
+                <li>Designed an intuitive UI/UX with interactive SVG maps featuring zoom, pan, and multi-floor
+                  navigation for an engaging user experience.</li>
+                <li>Deployed to Vercel cloud with CI/CD pipeline.</li>
+              </ul>
+            </div>
+            <div class="project-tech">
+              <span>Next.js</span>
+              <span>TypeScript</span>
+              <span>A*</span>
+              <span>Dijkstra</span>
+              <span>SVG</span>
+              <span>Tailwind CSS</span>
+            </div>
+            <div class="project-links">
+              <a href="https://prp-indoor-navigation.vercel.app/navigation" target="_blank" rel="noopener">Live
+                Demo</a>
+              <a href="https://github.com/GauravHmm/PRP-Indoor-Navigation" target="_blank" rel="noopener">Source
+                Code</a>
+            </div>
+          </div>
+
+          <!-- InsightRush -->
+          <div class="project">
+            <div class="project-top">
+              <h3 class="project-name">InsightRush</h3>
+              <span class="featured-tag">Hackathon</span>
+            </div>
+            <div class="project-desc">
+              <ul>
+                <li>Developed backend APIs for CSV ingestion and analytical query execution in a hackathon project.</li>
+                <li>Implemented schema and query validation to ensure safe and consistent data processing.</li>
+                <li>Built an approximate query-processing pipeline using sampling and statistical estimation for COUNT,
+                  SUM, and AVG operations.</li>
+                <li>Collaborated with frontend to design API responses including execution metadata and results.</li>
+              </ul>
+            </div>
+            <div class="project-tech">
+              <span>FastAPI</span>
+              <span>DuckDB</span>
+              <span>Python</span>
+              <span>Data Processing</span>
+            </div>
+          </div>
+
+          <!-- Lumi -->
+          <div class="project">
+            <div class="project-top">
+              <h3 class="project-name">Lumi</h3>
+            </div>
+            <div class="project-desc">
+              <ul>
+                <li>Built a full-stack Flask application with SQLite-backed data models for health & productivity
+                  tracking.</li>
+                <li>Implemented EMA-based habit tracking for consistency scoring.</li>
+                <li>Developed server-side chart generation using Matplotlib with Base64 rendering.</li>
+                <li>Integrated AI-based routine analysis with fallback logic for reliability.</li>
+              </ul>
+            </div>
+            <div class="project-tech">
+              <span>Python</span>
+              <span>Flask</span>
+              <span>SQLite</span>
+              <span>Matplotlib</span>
+              <span>LLM Integration</span>
+            </div>
+          </div>
+
+          
+
+          <!-- 6502 Emulator -->
+          <div class="project">
+            <div class="project-top">
+              <h3 class="project-name">6502 Emulator</h3>
+            </div>
+            <div class="project-desc">
+              <ul>
+                <li>Built a software emulator for the MOS 6502 microprocessor in Python.</li>
+                <li>Implemented instruction decoding, memory mapping, and CPU cycle emulation.</li>
+              </ul>
+            </div>
+            <div class="project-tech">
+              <span>Python</span>
+              <span>Systems Programming</span>
+            </div>
+          </div>
+
+          <!-- Keyboard-lock -->
+          <div class="project">
+            <div class="project-top">
+              <h3 class="project-name">Keyboard-lock</h3>
+            </div>
+            <div class="project-desc">
+              <ul>
+                <li>Utility tool providing Fn lock and arrow key lock functionality for 60% keyboard users.</li>
+                <li>Improves workflow efficiency for compact keyboard layouts.</li>
+              </ul>
+            </div>
+            <div class="project-tech">
+              <span>Utility</span>
+              <span>Keyboard Remapping</span>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- Education -->
+      <section class="section" id="education">
+        <h2 class="section-title">Education</h2>
+        <div class="edu-item">
+          <p class="edu-degree">B.Tech in Computer Science and Engineering</p>
+          <p class="edu-school">Vellore Institute of Technology (VIT), Vellore</p>
+          <p class="edu-year">2024 – 2028</p>
+        </div>
+      </section>
+
+      <!-- Coursework -->
+      <section class="section" id="coursework">
+        <h2 class="section-title">Relevant Coursework</h2>
+        <span class="coursework-label">Completed</span>
+        <div class="coursework-list" style="margin-bottom: 0.75rem;">
+          <span class="coursework-item">Data Structures & Algorithms</span>
+          <span class="coursework-item">Object-Oriented Programming</span>
+          <span class="coursework-item">Discrete Mathematics</span>
+        </div>
+        <span class="coursework-label">Currently Enrolled</span>
+        <div class="coursework-list">
+          <span class="coursework-item current">Operating Systems</span>
+          <span class="coursework-item current">Computer Networks</span>
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+  <!-- Export PDF button -->
+  <a class="export-btn" href="resume.html" target="_blank" title="View formatted resume">
+    <svg viewBox="0 0 24 24">
+      <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+      <polyline points="14 2 14 8 20 8" />
+      <line x1="16" y1="13" x2="8" y2="13" />
+      <line x1="16" y1="17" x2="8" y2="17" />
+      <polyline points="10 9 9 9 8 9" />
+    </svg>
+    Resume
+  </a>
+
+  <script>
+    // ── Custom cursor ──
+    const cursor = document.getElementById('cursor');
+    document.addEventListener('mousemove', e => {
+      cursor.style.left = e.clientX + 'px';
+      cursor.style.top = e.clientY + 'px';
+    });
+    document.querySelectorAll('a, button').forEach(el => {
+      el.addEventListener('mouseenter', () => cursor.style.opacity = '0');
+      el.addEventListener('mouseleave', () => cursor.style.opacity = '1');
+    });
+
+    // ── Mobile nav toggle ──
+    const navToggle = document.getElementById('navToggle');
+    const navLinks = document.getElementById('navLinks');
+    navToggle.addEventListener('click', () => {
+      navLinks.classList.toggle('open');
+    });
+    // Close menu when a link is clicked
+    navLinks.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => navLinks.classList.remove('open'));
+    });
+
+    // ── Active nav link tracking ──
+    const sections = document.querySelectorAll('.section[id]');
+    const navAnchors = document.querySelectorAll('.nav-links a');
+
+    function updateActiveNav() {
+      let current = '';
+      const offset = 120;
+      sections.forEach(section => {
+        const top = section.offsetTop - offset;
+        if (window.scrollY >= top) {
+          current = section.getAttribute('id');
+        }
+      });
+      navAnchors.forEach(a => {
+        a.classList.remove('active');
+        if (a.getAttribute('href') === '#' + current) {
+          a.classList.add('active');
+        }
+      });
+    }
+
+    window.addEventListener('scroll', updateActiveNav, { passive: true });
+    updateActiveNav();
+  </script>
+</body>
+
+</html>
