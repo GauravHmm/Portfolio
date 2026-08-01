@@ -21,68 +21,68 @@
     }
 
     :root {
-      /* Dark Theme (Chalkboard) - Default */
-      --bg: #1a1e23;
-      --surface: #24292e;
-      --border: #444c56;
-      --text: #f8f9fa;
-      --text-secondary: #c9d1d9;
-      --text-dim: #8b949e;
-      --accent-green: #a8e6cf;
-      --accent-orange: #ffd3b6;
-      --accent-pink: #ffb7b2;
-      --accent-blue: #b5d8ff;
-      --accent-yellow: #ffeaa7;
-      --accent: #ffd3b6;
-      --link: #a8e6cf;
-      --nav-height: 56px;
-      --nav-bg: rgba(26, 30, 35, 0.88);
-      --nav-mobile-bg: rgba(26, 30, 35, 0.96);
-      --grid-color: rgba(255, 255, 255, 0.04);
-      --shadow-color: rgba(0, 0, 0, 0.6);
-      --highlight-color: rgba(168, 230, 207, 0.15);
-      --sketch-radius: 255px 15px 225px 15px / 15px 225px 15px 255px;
-      --sketch-radius-alt: 15px 225px 15px 255px / 255px 15px 225px 15px;
-      --sketch-radius-sm: 30px 4px 28px 4px / 4px 28px 4px 30px;
+      --bg: #1c2028;
+      --surface: #242930;
+      --surface-hover: #2c323a;
+      --border: #3a4150;
+      --text: #eef0f4;
+      --text-secondary: #b8bec8;
+      --text-dim: #6e7888;
+      --accent-green: #7cdfb0;
+      --accent-orange: #f0a870;
+      --accent-pink: #e8879a;
+      --accent-blue: #7cb8df;
+      --accent-yellow: #e8d87c;
+      --accent: #f0a870;
+      --link: #7cdfb0;
+      --nav-height: 54px;
+      --nav-bg: rgba(28, 32, 40, 0.92);
+      --nav-mobile-bg: rgba(28, 32, 40, 0.97);
+      --grid-color: rgba(255, 255, 255, 0.028);
+      --shadow-color: #12151a;
+      --highlight-bg: rgba(124, 223, 176, 0.1);
+      --sketch-r: 255px 15px 225px 15px / 15px 225px 15px 255px;
+      --sketch-r2: 15px 225px 15px 255px / 255px 15px 225px 15px;
     }
 
     [data-theme="light"] {
-      --bg: #fffdf7;
+      --bg: #fdfbf6;
       --surface: #ffffff;
-      --border: #2b2b2b;
-      --text: #121212;
-      --text-secondary: #333333;
-      --text-dim: #555555;
-      --accent-green: #27ae60;
-      --accent-orange: #e67e22;
-      --accent-pink: #e74c3c;
-      --accent-blue: #3498db;
-      --accent-yellow: #f1c40f;
-      --accent: #e67e22;
-      --link: #27ae60;
-      --nav-bg: rgba(255, 253, 247, 0.88);
-      --nav-mobile-bg: rgba(255, 253, 247, 0.96);
-      --grid-color: rgba(0, 0, 0, 0.06);
-      --shadow-color: rgba(0, 0, 0, 0.15);
-      --highlight-color: rgba(241, 196, 15, 0.25);
+      --surface-hover: #f5f3ee;
+      --border: #d4cfc4;
+      --text: #1a1a1a;
+      --text-secondary: #4a4a4a;
+      --text-dim: #8a8a7a;
+      --accent-green: #3daa78;
+      --accent-orange: #d48a3c;
+      --accent-pink: #c85b6e;
+      --accent-blue: #3c8ab0;
+      --accent-yellow: #c4a832;
+      --accent: #d48a3c;
+      --link: #3daa78;
+      --nav-bg: rgba(253, 251, 246, 0.92);
+      --nav-mobile-bg: rgba(253, 251, 246, 0.97);
+      --grid-color: rgba(0, 0, 0, 0.04);
+      --shadow-color: #c8c4ba;
+      --highlight-bg: rgba(196, 168, 50, 0.12);
     }
 
     html {
       scroll-behavior: smooth;
-      scroll-padding-top: calc(var(--nav-height) + 1.5rem);
+      scroll-padding-top: calc(var(--nav-height) + 2rem);
     }
 
     body {
       font-family: 'Comic Neue', cursive, system-ui, sans-serif;
       background-color: var(--bg);
       background-image:
-        radial-gradient(var(--grid-color) 1.2px, transparent 1.2px);
-      background-size: 22px 22px;
+        radial-gradient(circle, var(--grid-color) 1px, transparent 1px);
+      background-size: 20px 20px;
       color: var(--text);
-      line-height: 1.7;
+      line-height: 1.65;
       cursor: none;
       -webkit-font-smoothing: antialiased;
-      transition: background-color 0.4s, color 0.4s;
+      transition: background-color 0.35s, color 0.35s;
       overflow-x: hidden;
     }
 
@@ -90,31 +90,55 @@
       background-image:
         linear-gradient(var(--grid-color) 1px, transparent 1px),
         linear-gradient(90deg, var(--grid-color) 1px, transparent 1px);
-      background-size: 28px 28px;
+      background-size: 26px 26px;
     }
+
+    /* ── Pencil Cursor ──
+       Tip is at (0,0), body goes up-right.
+       We set left/top to mouse position so tip = pointer. */
+    .cursor-pen {
+      position: fixed;
+      pointer-events: none;
+      z-index: 9999;
+      /* no translate — (0,0) of SVG IS the tip */
+    }
+    .cursor-pen svg {
+      width: 24px;
+      height: 24px;
+      overflow: visible;
+      filter: drop-shadow(1px 1px 2px rgba(0,0,0,0.35));
+      transition: transform 0.12s ease;
+    }
+    .cursor-pen.hover svg {
+      transform: scale(1.15) rotate(-8deg);
+    }
+
+    /* All elements get cursor:none */
+    *, *::before, *::after { cursor: none !important; }
 
     /* ── Theme Toggle ── */
     .theme-toggle {
-      background: none;
+      background: var(--surface);
       border: 2px solid var(--border);
       color: var(--text);
-      cursor: pointer;
+      cursor: none !important;
       display: flex;
       align-items: center;
       justify-content: center;
-      padding: 0.35rem;
-      border-radius: var(--sketch-radius-sm);
+      width: 34px;
+      height: 34px;
+      border-radius: 50% 46% 54% 42% / 44% 52% 48% 50%;
       transition: all 0.25s;
     }
     .theme-toggle:hover {
       border-color: var(--accent-orange);
-      transform: rotate(20deg) scale(1.1);
       color: var(--accent-orange);
+      transform: rotate(25deg);
       box-shadow: 2px 2px 0px var(--shadow-color);
     }
     .theme-toggle svg {
-      width: 18px;
-      height: 18px;
+      width: 16px;
+      height: 16px;
       stroke: currentColor;
       fill: none;
       stroke-width: 2;
@@ -122,59 +146,15 @@
       stroke-linejoin: round;
     }
 
-    /* ── Custom Pencil Cursor ── */
-    .cursor-pencil {
-      position: fixed;
-      pointer-events: none;
-      z-index: 9999;
-      transform: translate(-2px, -2px);
-      transition: opacity 0.2s;
-    }
-    .cursor-pencil svg {
-      width: 28px;
-      height: 28px;
-      filter: drop-shadow(1px 1px 1px rgba(0,0,0,0.3));
-      transition: transform 0.15s;
-    }
-    .cursor-pencil.hovering svg {
-      transform: rotate(-15deg) scale(1.2);
-    }
-
-    /* Ink dot trail */
-    .ink-dot {
-      position: fixed;
-      width: 4px;
-      height: 4px;
-      border-radius: 50%;
-      background: var(--accent-green);
-      pointer-events: none;
-      z-index: 9998;
-      opacity: 0.6;
-      transition: opacity 0.8s, transform 0.8s;
-    }
-    .ink-dot.fading {
-      opacity: 0;
-      transform: scale(0);
-    }
-
-    a,
-    button,
-    a *,
-    button * {
-      cursor: none !important;
-    }
-
-    /* ── Navigation Bar ── */
+    /* ── Navigation ── */
     .navbar {
       position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
+      top: 0; left: 0; right: 0;
       height: var(--nav-height);
       background: var(--nav-bg);
-      backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
-      border-bottom: 3px solid var(--border);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border-bottom: 2.5px solid var(--border);
       z-index: 1000;
       display: flex;
       align-items: center;
@@ -183,35 +163,34 @@
     }
 
     .nav-inner {
-      max-width: 1200px;
+      max-width: 1100px;
       width: 100%;
       display: flex;
       align-items: center;
       justify-content: space-between;
     }
 
-    /* Sketchy circle brand */
     .nav-brand {
-      font-size: 1rem;
+      font-size: 1.05rem;
       font-weight: 700;
       color: var(--text);
       text-decoration: none;
-      letter-spacing: 0.05em;
-      position: relative;
-      padding: 0.2rem 0.6rem;
+      letter-spacing: 0.08em;
+      padding: 0.15rem 0.55rem;
       border: 2.5px solid var(--text);
-      border-radius: 50% 45% 55% 40% / 40% 55% 45% 50%;
+      border-radius: 52% 44% 56% 40% / 42% 54% 44% 52%;
       transition: all 0.25s;
+      display: inline-block;
     }
     .nav-brand:hover {
       border-color: var(--accent-green);
       color: var(--accent-green);
-      transform: rotate(-5deg);
+      transform: rotate(-4deg) scale(1.05);
     }
 
     .nav-links {
       display: flex;
-      gap: 0.25rem;
+      gap: 0.2rem;
       list-style: none;
     }
 
@@ -220,23 +199,23 @@
       font-weight: 700;
       color: var(--text-dim);
       text-decoration: none;
-      padding: 0.4rem 0.75rem;
-      border-radius: var(--sketch-radius-sm);
+      padding: 0.35rem 0.7rem;
+      border: 2px solid transparent;
+      border-radius: 20px 4px 18px 4px / 4px 18px 4px 20px;
       transition: all 0.2s;
       letter-spacing: 0.02em;
-      border: 2px solid transparent;
     }
 
     .nav-links a:hover {
       color: var(--accent-orange);
       border-color: var(--accent-orange);
-      transform: rotate(-2deg);
       box-shadow: 2px 2px 0px var(--shadow-color);
     }
 
     .nav-links a.active {
       color: var(--accent-green);
       border-color: var(--accent-green);
+      background: var(--surface);
       box-shadow: 2px 2px 0px var(--shadow-color);
     }
 
@@ -245,378 +224,279 @@
       background: none;
       border: none;
       color: var(--text-secondary);
-      padding: 0.4rem;
+      padding: 0.35rem;
     }
-
     .nav-hamburger svg {
-      width: 20px;
-      height: 20px;
-      stroke: currentColor;
-      fill: none;
-      stroke-width: 2.5;
+      width: 22px; height: 22px;
+      stroke: currentColor; fill: none; stroke-width: 2.5;
     }
 
     /* ── Layout ── */
     .page {
-      max-width: 1200px;
+      max-width: 1100px;
       margin: 0 auto;
-      padding: calc(var(--nav-height) + 2.5rem) 3rem 4rem;
+      padding: calc(var(--nav-height) + 3rem) 2.5rem 5rem;
       min-height: 100vh;
       display: grid;
-      grid-template-columns: 300px 1fr;
+      grid-template-columns: 280px 1fr;
       gap: 4rem;
       position: relative;
     }
 
-    /* ── Floating Doodle Decorations ── */
-    .doodle-decor {
+    /* ── Doodle margin decorations ── */
+    .doodle {
       position: absolute;
       pointer-events: none;
-      opacity: 0.12;
-      color: var(--text);
       z-index: 0;
+      color: var(--text-dim);
+      opacity: 0.13;
     }
-    .doodle-decor svg {
-      stroke: currentColor;
-      fill: none;
-      stroke-width: 2;
-      stroke-linecap: round;
-      stroke-linejoin: round;
+    .doodle svg {
+      stroke: currentColor; fill: none;
+      stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round;
     }
-    .doodle-star { top: 120px; right: 40px; animation: doodle-float 6s ease-in-out infinite; }
-    .doodle-spiral { top: 450px; left: -20px; animation: doodle-float 8s ease-in-out infinite reverse; }
-    .doodle-arrow { top: 700px; right: 80px; animation: doodle-float 7s ease-in-out infinite 1s; }
-    .doodle-zigzag { bottom: 200px; left: 50px; animation: doodle-float 5s ease-in-out infinite 0.5s; }
-    .doodle-circle { top: 300px; right: 200px; animation: doodle-float 9s ease-in-out infinite 2s; }
+    .d1 { top: 100px; right: 30px; animation: bob 7s ease-in-out infinite; }
+    .d2 { top: 520px; left: -10px; animation: bob 9s ease-in-out infinite 1.5s; }
+    .d3 { top: 850px; right: 60px; animation: bob 6s ease-in-out infinite 3s; }
+    .d4 { bottom: 150px; left: 60px; animation: bob 8s ease-in-out infinite 0.5s; }
 
-    @keyframes doodle-float {
-      0%, 100% { transform: translateY(0) rotate(0deg); }
-      50% { transform: translateY(-12px) rotate(5deg); }
+    @keyframes bob {
+      0%, 100% { transform: translateY(0) rotate(0); }
+      50% { transform: translateY(-10px) rotate(4deg); }
     }
 
-    /* ── LEFT COLUMN ── */
+    /* ── Sidebar ── */
     .sidebar {
       position: sticky;
-      top: calc(var(--nav-height) + 2.5rem);
+      top: calc(var(--nav-height) + 3rem);
       align-self: start;
       z-index: 1;
     }
 
-    /* Highlighted name with marker effect */
     .name {
-      font-size: 1.85rem;
+      font-size: 1.8rem;
       font-weight: 700;
-      letter-spacing: -0.01em;
       line-height: 1.2;
-      margin-bottom: 0.35rem;
-      position: relative;
-      display: inline-block;
+      margin-bottom: 0.3rem;
     }
-    .name-highlight {
+    .name-hl {
       position: relative;
       display: inline;
     }
-    .name-highlight::after {
+    .name-hl::after {
       content: '';
       position: absolute;
-      left: -4px;
-      right: -4px;
-      bottom: 0;
-      height: 40%;
-      background: var(--highlight-color);
-      border-radius: var(--sketch-radius-sm);
+      left: -3px; right: -3px; bottom: 2px;
+      height: 35%;
+      background: var(--highlight-bg);
+      border-radius: 3px 8px 4px 6px;
       z-index: -1;
-      transform: rotate(-0.5deg);
     }
 
     .role {
-      font-size: 0.9rem;
+      font-size: 0.88rem;
       font-weight: 700;
-      color: var(--text-secondary);
+      color: var(--text-dim);
       margin-bottom: 2rem;
       font-style: italic;
     }
 
-    .sidebar-section {
-      margin-bottom: 2rem;
-    }
+    .sidebar-section { margin-bottom: 1.8rem; }
 
-    /* Doodle-style section labels with hand-drawn underline */
     .sidebar-label {
-      font-size: 0.7rem;
+      font-size: 0.68rem;
       font-weight: 700;
       text-transform: uppercase;
-      letter-spacing: 0.14em;
+      letter-spacing: 0.15em;
       color: var(--accent-green);
-      margin-bottom: 0.75rem;
-      position: relative;
+      margin-bottom: 0.65rem;
       display: inline-block;
-      padding-bottom: 4px;
-    }
-    .sidebar-label::after {
-      content: '';
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      height: 3px;
-      background: var(--accent-green);
-      border-radius: 2px;
-      transform: rotate(-0.5deg);
+      border-bottom: 2px solid var(--accent-green);
+      padding-bottom: 2px;
     }
 
-    .contact-list {
-      list-style: none;
-    }
-
-    .contact-list li {
-      margin-bottom: 0.4rem;
-    }
+    .contact-list { list-style: none; }
+    .contact-list li { margin-bottom: 0.35rem; }
 
     .contact-list a {
       color: var(--text-secondary);
       text-decoration: none;
-      font-size: 0.82rem;
+      font-size: 0.8rem;
       font-weight: 400;
-      transition: all 0.2s;
+      transition: color 0.2s;
       display: inline-flex;
       align-items: center;
       gap: 0.4rem;
-      position: relative;
     }
-
-    .contact-list a:hover {
-      color: var(--accent-orange);
-    }
-    .contact-list a:hover::after {
-      content: '';
-      position: absolute;
-      bottom: -2px;
-      left: 0;
-      right: 0;
-      height: 2px;
-      background: var(--accent-orange);
-      border-radius: 2px;
-      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 120 6' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 3 Q10 0 20 3 T40 3 T60 3 T80 3 T100 3 T120 3' fill='none' stroke='%23ffd3b6' stroke-width='2'/%3E%3C/svg%3E");
-      background-size: contain;
-      background-repeat: repeat-x;
-    }
+    .contact-list a:hover { color: var(--accent-orange); }
 
     .contact-list .label {
       color: var(--text-dim);
-      font-size: 0.72rem;
+      font-size: 0.7rem;
       font-weight: 700;
-      width: 50px;
+      width: 52px;
       flex-shrink: 0;
     }
 
     .skills-list {
       display: flex;
       flex-wrap: wrap;
-      gap: 0.4rem;
+      gap: 0.35rem;
     }
 
     .skill {
-      font-size: 0.75rem;
+      font-size: 0.72rem;
       font-weight: 700;
       color: var(--text-secondary);
-      padding: 0.3rem 0.65rem;
-      border: 2.5px solid var(--border);
-      border-radius: var(--sketch-radius-alt);
+      padding: 0.25rem 0.55rem;
+      border: 2px solid var(--border);
+      border-radius: var(--sketch-r2);
       transition: all 0.2s;
+      background: var(--surface);
     }
-
     .skill:hover {
       border-color: var(--accent-orange);
       color: var(--text);
-      transform: rotate(-3deg) scale(1.05);
-      box-shadow: 3px 3px 0px var(--shadow-color);
-      background: var(--surface);
+      transform: rotate(-2deg) scale(1.04);
+      box-shadow: 2px 2px 0px var(--shadow-color);
     }
 
     .languages-text {
-      font-size: 0.85rem;
+      font-size: 0.82rem;
       color: var(--text-secondary);
-      line-height: 1.6;
       font-weight: 700;
     }
 
-    /* ── RIGHT COLUMN ── */
-    .main {
-      padding-top: 0.25rem;
-      z-index: 1;
-    }
+    /* ── Main Column ── */
+    .main { z-index: 1; }
 
-    .section {
-      margin-bottom: 2.75rem;
-    }
+    .section { margin-bottom: 2.8rem; }
 
-    /* Hand-drawn squiggly section title */
+    /* Squiggly underline via SVG background on section titles */
     .section-title {
-      font-size: 0.85rem;
+      font-size: 0.82rem;
       font-weight: 700;
       text-transform: uppercase;
       letter-spacing: 0.14em;
       color: var(--accent-green);
-      margin-bottom: 1.25rem;
-      padding-bottom: 0.6rem;
+      margin-bottom: 1.2rem;
+      padding-bottom: 8px;
+      border: none;
       position: relative;
-      border-bottom: none;
+      display: inline-block;
     }
     .section-title::after {
       content: '';
       position: absolute;
-      bottom: 0;
-      left: 0;
+      bottom: 0; left: 0;
       width: 100%;
-      height: 6px;
-      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 8' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 4 Q10 0 20 4 T40 4 T60 4 T80 4 T100 4 T120 4 T140 4 T160 4 T180 4 T200 4 T220 4 T240 4 T260 4 T280 4 T300 4 T320 4 T340 4 T360 4 T380 4 T400 4' fill='none' stroke='%23a8e6cf' stroke-width='2.5' stroke-linecap='round'/%3E%3C/svg%3E");
-      background-size: contain;
-      background-repeat: no-repeat;
+      height: 5px;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 120 6' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 3 Q5 0.5 10 3 T20 3 T30 3 T40 3 T50 3 T60 3 T70 3 T80 3 T90 3 T100 3 T110 3 T120 3' fill='none' stroke='%237cdfb0' stroke-width='2' stroke-linecap='round'/%3E%3C/svg%3E");
+      background-repeat: repeat-x;
+      background-size: 60px 5px;
     }
     [data-theme="light"] .section-title::after {
-      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 8' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 4 Q10 0 20 4 T40 4 T60 4 T80 4 T100 4 T120 4 T140 4 T160 4 T180 4 T200 4 T220 4 T240 4 T260 4 T280 4 T300 4 T320 4 T340 4 T360 4 T380 4 T400 4' fill='none' stroke='%2327ae60' stroke-width='2.5' stroke-linecap='round'/%3E%3C/svg%3E");
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 120 6' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 3 Q5 0.5 10 3 T20 3 T30 3 T40 3 T50 3 T60 3 T70 3 T80 3 T90 3 T100 3 T110 3 T120 3' fill='none' stroke='%233daa78' stroke-width='2' stroke-linecap='round'/%3E%3C/svg%3E");
     }
 
     /* About */
     .about-text {
-      font-size: 0.92rem;
+      font-size: 0.88rem;
       color: var(--text-secondary);
       line-height: 1.85;
-      max-width: 600px;
-      font-weight: 400;
+      max-width: 580px;
     }
 
     /* Projects */
-    .projects-grid {
-      display: grid;
-      gap: 0.85rem;
-    }
+    .projects-grid { display: grid; gap: 0.9rem; }
 
     .project {
-      padding: 1.25rem;
+      padding: 1.2rem 1.3rem;
       border: 2.5px solid var(--border);
-      border-radius: var(--sketch-radius);
-      transition: all 0.25s;
+      border-radius: var(--sketch-r);
       background: var(--surface);
-      position: relative;
-      /* stagger animation */
-      opacity: 0;
-      transform: translateY(20px);
-      animation: card-enter 0.5s ease forwards;
+      transition: all 0.22s;
     }
-    .project:nth-child(1) { animation-delay: 0.1s; }
-    .project:nth-child(2) { animation-delay: 0.2s; }
-    .project:nth-child(3) { animation-delay: 0.3s; }
-    .project:nth-child(4) { animation-delay: 0.4s; }
-    .project:nth-child(5) { animation-delay: 0.5s; }
-
-    @keyframes card-enter {
-      to { opacity: 1; transform: translateY(0); }
-    }
-
     .project:hover {
       border-color: var(--accent-green);
-      transform: translateY(-3px) rotate(0.5deg);
-      box-shadow: 5px 5px 0px var(--shadow-color);
-    }
-
-    /* Tape / pin decoration on featured project */
-    .project:first-child::before {
-      content: '📌';
-      position: absolute;
-      top: -12px;
-      right: 20px;
-      font-size: 1.2rem;
-      transform: rotate(15deg);
-      filter: drop-shadow(1px 1px 1px rgba(0,0,0,0.3));
+      transform: translateY(-2px);
+      box-shadow: 4px 4px 0px var(--shadow-color);
     }
 
     .project-top {
       display: flex;
       justify-content: space-between;
       align-items: flex-start;
-      margin-bottom: 0.5rem;
+      margin-bottom: 0.45rem;
       gap: 0.75rem;
     }
 
     .project-name {
-      font-size: 0.98rem;
+      font-size: 0.95rem;
       font-weight: 700;
-      color: var(--text);
     }
 
     .featured-tag {
-      font-size: 0.62rem;
+      font-size: 0.6rem;
       font-weight: 700;
       text-transform: uppercase;
       letter-spacing: 0.06em;
       color: var(--bg);
       background: var(--accent-orange);
-      border: 2.5px solid var(--accent-orange);
-      padding: 0.15rem 0.55rem;
-      border-radius: var(--sketch-radius-sm);
+      padding: 0.15rem 0.5rem;
+      border-radius: 14px 4px 12px 4px / 4px 12px 4px 14px;
       white-space: nowrap;
       flex-shrink: 0;
-      transform: rotate(2deg);
-      box-shadow: 2px 2px 0px var(--shadow-color);
+      transform: rotate(1.5deg);
+      box-shadow: 1px 1px 0px var(--shadow-color);
     }
 
     .project-desc {
-      font-size: 0.82rem;
+      font-size: 0.8rem;
       color: var(--text-secondary);
-      line-height: 1.65;
-      margin-bottom: 0.75rem;
+      line-height: 1.7;
+      margin-bottom: 0.7rem;
     }
-
-    .project-desc ul {
-      list-style: none;
-      padding: 0;
-    }
+    .project-desc ul { list-style: none; padding: 0; }
 
     .project-desc li {
-      padding-left: 1.2rem;
+      padding-left: 1rem;
       position: relative;
-      margin-bottom: 0.25rem;
+      margin-bottom: 0.2rem;
     }
-
     .project-desc li::before {
-      content: '✏️';
+      content: '–';
       position: absolute;
       left: 0;
-      font-size: 0.7rem;
+      color: var(--accent-green);
+      font-weight: 700;
     }
 
     .project-tech {
       display: flex;
       flex-wrap: wrap;
-      gap: 0.35rem;
-      margin-bottom: 0.75rem;
+      gap: 0.3rem;
+      margin-bottom: 0.7rem;
     }
-
     .project-tech span {
-      font-size: 0.7rem;
+      font-size: 0.68rem;
       font-weight: 700;
-      color: var(--text-secondary);
-      background: var(--surface);
-      border: 2px solid var(--border);
-      padding: 0.18rem 0.5rem;
-      border-radius: var(--sketch-radius-alt);
+      color: var(--text-dim);
+      background: var(--bg);
+      border: 1.5px solid var(--border);
+      padding: 0.15rem 0.45rem;
+      border-radius: var(--sketch-r2);
       transition: all 0.2s;
     }
     .project-tech span:hover {
       border-color: var(--accent-blue);
-      color: var(--text);
-      transform: rotate(2deg);
+      color: var(--text-secondary);
     }
 
-    .project-links {
-      display: flex;
-      gap: 0.75rem;
-    }
+    .project-links { display: flex; gap: 0.9rem; }
 
     .project-links a {
-      font-size: 0.8rem;
+      font-size: 0.78rem;
       font-weight: 700;
       color: var(--accent-green);
       text-decoration: none;
@@ -624,45 +504,31 @@
       border-bottom: 2px dashed var(--accent-green);
       padding-bottom: 1px;
     }
-
     .project-links a:hover {
       color: var(--accent-orange);
-      border-bottom-color: var(--accent-orange);
-      transform: translateY(-1px);
+      border-color: var(--accent-orange);
     }
-
     .project-links a::after {
       content: ' ↗';
-      font-size: 0.7rem;
+      font-size: 0.68rem;
     }
 
     /* Education */
     .edu-item {
-      margin-bottom: 0.75rem;
-      padding: 1rem;
+      padding: 1rem 1.2rem;
       border: 2.5px solid var(--border);
-      border-radius: var(--sketch-radius-alt);
+      border-radius: var(--sketch-r2);
       background: var(--surface);
       transition: all 0.2s;
     }
     .edu-item:hover {
       box-shadow: 3px 3px 0px var(--shadow-color);
-      transform: rotate(-0.5deg);
     }
 
-    .edu-degree {
-      font-size: 0.92rem;
-      font-weight: 700;
-      color: var(--text);
-    }
-
-    .edu-school {
-      font-size: 0.82rem;
-      color: var(--text-secondary);
-    }
-
+    .edu-degree { font-size: 0.9rem; font-weight: 700; }
+    .edu-school { font-size: 0.82rem; color: var(--text-secondary); }
     .edu-year {
-      font-size: 0.78rem;
+      font-size: 0.76rem;
       color: var(--accent-orange);
       font-weight: 700;
       font-style: italic;
@@ -673,322 +539,173 @@
       list-style: none;
       display: flex;
       flex-wrap: wrap;
-      gap: 0.4rem;
+      gap: 0.35rem;
     }
 
     .coursework-item {
-      font-size: 0.75rem;
+      font-size: 0.72rem;
       font-weight: 700;
       color: var(--text-secondary);
-      padding: 0.3rem 0.65rem;
-      border: 2.5px solid var(--border);
-      border-radius: var(--sketch-radius);
+      padding: 0.25rem 0.6rem;
+      border: 2px solid var(--border);
+      border-radius: var(--sketch-r);
+      background: var(--surface);
       transition: all 0.2s;
     }
     .coursework-item:hover {
-      transform: rotate(2deg);
       border-color: var(--accent-blue);
     }
 
     .coursework-item.current {
       border-color: var(--accent-green);
       color: var(--text);
-      transform: rotate(-1.5deg);
-      box-shadow: 3px 3px 0px var(--shadow-color);
-      background: var(--surface);
+      box-shadow: 2px 2px 0px var(--shadow-color);
     }
 
     .coursework-label {
-      font-size: 0.7rem;
+      font-size: 0.68rem;
       font-weight: 700;
       color: var(--accent-orange);
       display: block;
-      margin-bottom: 0.5rem;
+      margin-bottom: 0.45rem;
       font-style: italic;
     }
 
-    /* Achievements */
-    .achievements-text {
-      font-size: 0.82rem;
-      color: var(--text-secondary);
-      line-height: 1.6;
-    }
-
-    /* Export Button — Sticker style */
+    /* Export btn */
     .export-btn {
       position: fixed;
-      bottom: 2rem;
-      right: 2rem;
+      bottom: 1.8rem; right: 1.8rem;
       z-index: 100;
       display: inline-flex;
       align-items: center;
-      gap: 0.6rem;
+      gap: 0.5rem;
       font-family: 'Comic Neue', cursive;
-      font-size: 0.88rem;
+      font-size: 0.82rem;
       font-weight: 700;
       color: var(--bg);
       background: var(--accent-orange);
-      border: 3px solid var(--text);
-      border-radius: var(--sketch-radius-alt);
-      padding: 0.7rem 1.25rem;
-      transition: all 0.25s;
-      cursor: none;
-      letter-spacing: 0.05em;
-      box-shadow: 4px 4px 0px var(--shadow-color);
+      border: 2.5px solid var(--text);
+      border-radius: var(--sketch-r2);
+      padding: 0.6rem 1.1rem;
+      box-shadow: 3px 3px 0px var(--shadow-color);
       text-decoration: none;
       transform: rotate(2deg);
+      transition: all 0.22s;
     }
-
     .export-btn:hover {
       background: var(--accent-green);
-      transform: translateY(-3px) rotate(-3deg);
-      box-shadow: 6px 6px 0px var(--shadow-color);
+      transform: translateY(-2px) rotate(-2deg);
+      box-shadow: 5px 5px 0px var(--shadow-color);
     }
-
     .export-btn svg {
-      width: 16px;
-      height: 16px;
-      stroke: currentColor;
-      fill: none;
-      stroke-width: 2.5;
-      stroke-linecap: round;
-      stroke-linejoin: round;
-      transition: transform 0.3s ease;
+      width: 15px; height: 15px;
+      stroke: currentColor; fill: none;
+      stroke-width: 2.5; stroke-linecap: round; stroke-linejoin: round;
     }
 
-    .export-btn:hover svg {
-      transform: rotate(-10deg);
-    }
-
-    /* ── Footer ── */
     .footer-badge {
       position: fixed;
-      bottom: 1.5rem;
-      left: 1.5rem;
-      font-size: 0.65rem;
+      bottom: 1.5rem; left: 1.5rem;
+      font-size: 0.62rem;
       color: var(--text-dim);
-      line-height: 1.5;
     }
-
-    .footer-badge strong {
-      font-weight: 600;
-      color: var(--text-secondary);
-    }
+    .footer-badge strong { font-weight: 700; color: var(--text-secondary); }
 
     /* ── Responsive ── */
     @media (max-width: 860px) {
       .page {
         grid-template-columns: 1fr;
         gap: 2.5rem;
-        padding: calc(var(--nav-height) + 1.5rem) 1.5rem 2.5rem;
+        padding: calc(var(--nav-height) + 1.5rem) 1.5rem 3rem;
       }
-
-      .sidebar {
-        position: static;
-      }
-
-      .name {
-        font-size: 1.5rem;
-      }
-
-      body {
-        cursor: auto;
-      }
-
-      .cursor-pencil,
-      .ink-dot {
-        display: none !important;
-      }
-
-      a, button, a *, button * {
-        cursor: pointer !important;
-      }
-
-      .footer-badge {
-        position: static;
-        padding: 2rem 0 1rem;
-        text-align: center;
-      }
-
+      .sidebar { position: static; }
+      .name { font-size: 1.45rem; }
+      body { cursor: auto; }
+      *, *::before, *::after { cursor: auto !important; }
+      a, button, a *, button * { cursor: pointer !important; }
+      .cursor-pen { display: none !important; }
+      .footer-badge { position: static; padding: 2rem 0 1rem; text-align: center; }
       .nav-links {
         display: none;
         position: absolute;
         top: var(--nav-height);
-        left: 0;
-        right: 0;
+        left: 0; right: 0;
         flex-direction: column;
         background: var(--nav-mobile-bg);
         backdrop-filter: blur(16px);
-        border-bottom: 3px solid var(--border);
+        border-bottom: 2.5px solid var(--border);
         padding: 0.5rem;
         gap: 0;
       }
-
-      .nav-links.open {
-        display: flex;
-      }
-
-      .nav-links a {
-        padding: 0.65rem 1rem;
-        font-size: 0.82rem;
-      }
-
-      .nav-hamburger {
-        display: block;
-      }
-
-      .doodle-decor {
-        display: none;
-      }
+      .nav-links.open { display: flex; }
+      .nav-links a { padding: 0.6rem 1rem; font-size: 0.82rem; }
+      .nav-hamburger { display: block; }
+      .doodle { display: none; }
     }
 
     @media (max-width: 480px) {
-      .page {
-        padding: calc(var(--nav-height) + 1rem) 1rem 2rem;
-      }
-
-      .project {
-        padding: 1rem;
-      }
+      .page { padding: calc(var(--nav-height) + 1rem) 1rem 2rem; }
+      .project { padding: 1rem; }
     }
 
-    /* ── Print / PDF Export ── */
+    /* ── Print ── */
     @media print {
-      * {
-        -webkit-print-color-adjust: exact !important;
-        print-color-adjust: exact !important;
-      }
-
-      html,
-      body {
-        background: #fff !important;
-        color: #111 !important;
-        cursor: auto !important;
-        font-size: 10px;
-      }
-
+      * { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
+      html, body { background: #fff !important; color: #111 !important; cursor: auto !important; font-size: 10px; }
       :root {
-        --bg: #ffffff;
-        --surface: #f5f5f5;
-        --border: #d0d0d0;
-        --text: #111111;
-        --text-secondary: #444444;
-        --text-dim: #777777;
-        --accent: #555555;
-        --link: #333333;
+        --bg:#fff;--surface:#f5f5f5;--border:#d0d0d0;--text:#111;
+        --text-secondary:#444;--text-dim:#777;--accent:#555;--link:#333;
       }
-
-      .cursor-pencil,
-      .ink-dot,
-      .footer-badge,
-      .export-btn,
-      .navbar,
-      .doodle-decor {
-        display: none !important;
-      }
-
-      .page {
-        max-width: 100%;
-        padding: 0;
-        margin: 0;
-        gap: 1.5rem;
-        grid-template-columns: 240px 1fr;
-        min-height: auto;
-      }
-
-      .sidebar {
-        position: static;
-      }
-
-      .section {
-        margin-bottom: 1.25rem;
-      }
-
-      .project {
-        border: 1px solid #d0d0d0;
-        break-inside: avoid;
-        page-break-inside: avoid;
-        padding: 0.8rem;
-        margin-bottom: 0.4rem;
-        opacity: 1;
-        transform: none;
-        animation: none;
-      }
-
-      .project:hover {
-        transform: none;
-      }
-
-      .project:first-child::before {
-        display: none;
-      }
-
-      .project-links a::after {
-        content: none;
-      }
-
-      a {
-        color: #333 !important;
-        text-decoration: none;
-      }
-
-      .name {
-        font-size: 1.35rem;
-      }
-
-      .section-title {
-        margin-bottom: 0.6rem;
-        padding-bottom: 0.3rem;
-      }
-      .section-title::after {
-        display: none;
-      }
-
-      .sidebar-section {
-        margin-bottom: 1.25rem;
-      }
-
-      @page {
-        size: A4;
-        margin: 1.2cm;
-      }
+      .cursor-pen,.footer-badge,.export-btn,.navbar,.doodle { display: none !important; }
+      .page { max-width:100%;padding:0;margin:0;gap:1.5rem;grid-template-columns:240px 1fr;min-height:auto; }
+      .sidebar { position: static; }
+      .section { margin-bottom: 1.25rem; }
+      .project { border:1px solid #d0d0d0;break-inside:avoid;page-break-inside:avoid;padding:0.8rem;margin-bottom:0.4rem; }
+      .project:hover { transform: none; box-shadow: none; }
+      .project-links a::after { content: none; }
+      a { color: #333 !important; text-decoration: none; }
+      .name { font-size: 1.35rem; }
+      .section-title { margin-bottom: 0.6rem; padding-bottom: 0.3rem; }
+      .section-title::after { display: none; }
+      .sidebar-section { margin-bottom: 1.25rem; }
+      @page { size: A4; margin: 1.2cm; }
     }
   </style>
 </head>
 
 <body>
-  <!-- Custom Pencil Cursor -->
-  <div class="cursor-pencil" id="cursorPencil">
-    <svg viewBox="0 0 28 28" xmlns="http://www.w3.org/2000/svg">
-      <!-- pencil body -->
-      <line x1="6" y1="22" x2="22" y2="6" stroke="var(--accent-orange)" stroke-width="3" stroke-linecap="round"/>
-      <!-- pencil tip -->
-      <path d="M4 26 L6 22 L8 24 Z" fill="var(--accent-orange)" stroke="var(--text)" stroke-width="1"/>
-      <!-- pencil top -->
-      <line x1="20" y1="8" x2="24" y2="4" stroke="var(--accent-pink)" stroke-width="3" stroke-linecap="round"/>
+  <!-- Pencil cursor: tip at SVG origin (0,0), body extends up-right -->
+  <div class="cursor-pen" id="cursorPen">
+    <svg viewBox="-2 -2 26 26" xmlns="http://www.w3.org/2000/svg">
+      <!-- tip/nib -->
+      <path d="M0 0 L3 -4 L5 -1 Z" fill="var(--accent-orange)" stroke="var(--text)" stroke-width="0.5"/>
+      <!-- wood body -->
+      <line x1="3" y1="-4" x2="16" y2="-17" stroke="var(--accent-yellow)" stroke-width="4" stroke-linecap="round"/>
+      <!-- stripe -->
+      <line x1="3" y1="-4" x2="16" y2="-17" stroke="var(--accent-orange)" stroke-width="1.5" stroke-linecap="round"/>
+      <!-- eraser band -->
+      <line x1="15" y1="-16" x2="17" y2="-18" stroke="var(--border)" stroke-width="4.5" stroke-linecap="butt"/>
       <!-- eraser -->
-      <circle cx="24" cy="4" r="2" fill="var(--accent-pink)" stroke="var(--text)" stroke-width="0.8"/>
-      <!-- writing tip dot -->
-      <circle cx="4" cy="26" r="1.5" fill="var(--text)"/>
+      <line x1="17" y1="-18" x2="19" y2="-20" stroke="var(--accent-pink)" stroke-width="4" stroke-linecap="round"/>
     </svg>
   </div>
 
-  <!-- ── Navigation ── -->
+  <!-- Navigation -->
   <nav class="navbar" id="navbar">
     <div class="nav-inner">
       <a href="#" class="nav-brand">GR</a>
-      <div style="display: flex; align-items: center; gap: 0.75rem;">
+      <div style="display: flex; align-items: center; gap: 0.6rem;">
         <button id="themeToggle" class="theme-toggle" aria-label="Toggle Theme">
           <svg id="moon-icon" viewBox="0 0 24 24" style="display: none;"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
           <svg id="sun-icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
         </button>
         <button class="nav-hamburger" id="navToggle" aria-label="Toggle navigation">
           <svg viewBox="0 0 24 24">
-          <line x1="3" y1="6" x2="21" y2="6" />
-          <line x1="3" y1="12" x2="21" y2="12" />
-          <line x1="3" y1="18" x2="21" y2="18" />
-        </svg>
-      </button>
+            <line x1="4" y1="6" x2="20" y2="6" />
+            <line x1="4" y1="12" x2="20" y2="12" />
+            <line x1="4" y1="18" x2="20" y2="18" />
+          </svg>
+        </button>
       </div>
       <ul class="nav-links" id="navLinks">
         <li><a href="#about">About</a></li>
@@ -1000,54 +717,27 @@
   </nav>
 
   <div class="page">
-    <!-- Floating Doodle Decorations -->
-    <div class="doodle-decor doodle-star">
-      <svg width="40" height="40" viewBox="0 0 40 40"><path d="M20 2 L24 14 L38 14 L27 22 L31 36 L20 28 L9 36 L13 22 L2 14 L16 14 Z"/></svg>
-    </div>
-    <div class="doodle-decor doodle-spiral">
-      <svg width="50" height="50" viewBox="0 0 50 50"><path d="M25 25 Q30 20 28 15 Q25 8 18 12 Q10 17 15 25 Q20 35 32 30 Q42 24 35 14 Q28 2 14 8"/></svg>
-    </div>
-    <div class="doodle-decor doodle-arrow">
-      <svg width="60" height="30" viewBox="0 0 60 30"><path d="M5 15 Q15 5 30 15 T55 15"/><path d="M48 10 L55 15 L48 20"/></svg>
-    </div>
-    <div class="doodle-decor doodle-zigzag">
-      <svg width="60" height="20" viewBox="0 0 60 20"><path d="M0 10 L10 2 L20 18 L30 2 L40 18 L50 2 L60 10"/></svg>
-    </div>
-    <div class="doodle-decor doodle-circle">
-      <svg width="35" height="35" viewBox="0 0 35 35"><circle cx="17" cy="17" r="14" /><circle cx="17" cy="17" r="8" /></svg>
-    </div>
+    <!-- Doodle margin decorations -->
+    <div class="doodle d1"><svg width="36" height="36" viewBox="0 0 36 36"><path d="M18 2 L21 13 L33 13 L24 20 L27 32 L18 25 L9 32 L12 20 L3 13 L15 13 Z"/></svg></div>
+    <div class="doodle d2"><svg width="44" height="44" viewBox="0 0 44 44"><path d="M22 22 Q27 17 25 12 Q22 5 15 9 Q7 14 12 22 Q17 32 29 27 Q39 21 32 11"/></svg></div>
+    <div class="doodle d3"><svg width="50" height="24" viewBox="0 0 50 24"><path d="M4 12 Q12 3 25 12 T46 12"/><path d="M40 7 L46 12 L40 17"/></svg></div>
+    <div class="doodle d4"><svg width="50" height="16" viewBox="0 0 50 16"><path d="M0 8 L8 2 L16 14 L24 2 L32 14 L40 2 L48 8"/></svg></div>
 
-    <!-- LEFT COLUMN -->
+    <!-- Sidebar -->
     <aside class="sidebar">
-      <h1 class="name"><span class="name-highlight">Gauravsingh</span><br><span class="name-highlight">Rajpurohit</span></h1>
+      <h1 class="name"><span class="name-hl">Gauravsingh</span><br><span class="name-hl">Rajpurohit</span></h1>
       <p class="role">Software Engineer · Full Stack Developer</p>
 
       <div class="sidebar-section">
         <p class="sidebar-label">Contact</p>
         <ul class="contact-list">
+          <li><a href="mailto:gauravrajpurohit2006@gmail.com"><span class="label">Email</span> gauravrajpurohit2006@gmail.com</a></li>
+          <li><a href="tel:+917506631555"><span class="label">Phone</span> 7506631555</a></li>
+          <li><a href="https://github.com/GauravHmm" target="_blank" rel="noopener"><span class="label">GitHub</span> GauravHmm</a></li>
+          <li><a href="https://www.linkedin.com/in/gauravsingh-rajpurohit-47409332b" target="_blank" rel="noopener"><span class="label">LinkedIn</span> gauravsingh-rajpurohit</a></li>
           <li>
-            <a href="mailto:gauravrajpurohit2006@gmail.com">
-              <span class="label">Email</span> gauravrajpurohit2006@gmail.com
-            </a>
-          </li>
-          <li>
-            <a href="tel:+917506631555">
-              <span class="label">Phone</span> 7506631555
-            </a>
-          </li>
-          <li>
-            <a href="https://github.com/GauravHmm" target="_blank" rel="noopener">
-              <span class="label">GitHub</span> GauravHmm
-            </a>
-          </li>
-          <li>
-            <a href="https://www.linkedin.com/in/gauravsingh-rajpurohit-47409332b" target="_blank" rel="noopener">
-              <span class="label">LinkedIn</span> gauravsingh-rajpurohit
-            </a>
-          </li>
-          <li>
-            <span class="label" style="color: var(--text-dim); font-size: 0.72rem; font-weight: 700;">Location</span>
-            <span style="font-size: 0.82rem; color: var(--text-secondary);">Vellore, Tamil Nadu</span>
+            <span class="label" style="color: var(--text-dim); font-size: 0.7rem; font-weight: 700;">Location</span>
+            <span style="font-size: 0.8rem; color: var(--text-secondary);">Vellore, Tamil Nadu</span>
           </li>
         </ul>
       </div>
@@ -1079,9 +769,8 @@
       </div>
     </aside>
 
-    <!-- RIGHT COLUMN -->
+    <!-- Main -->
     <main class="main">
-      <!-- About -->
       <section class="section" id="about">
         <h2 class="section-title">About</h2>
         <p class="about-text">
@@ -1094,12 +783,10 @@
         </p>
       </section>
 
-      <!-- Projects -->
       <section class="section" id="projects">
         <h2 class="section-title">Projects</h2>
         <div class="projects-grid">
 
-          <!-- PRP Indoor Navigation -->
           <div class="project">
             <div class="project-top">
               <h3 class="project-name">PRP Indoor Navigation System</h3>
@@ -1107,32 +794,21 @@
             </div>
             <div class="project-desc">
               <ul>
-                <li>Built a scalable, cloud-deployable web-based indoor navigation system for a multi-block academic
-                  building using graph algorithms and object-oriented design principles.</li>
-                <li>Implemented A* for shortest path and Dijkstra for nearest facility search, demonstrating strong
-                  algorithmic problem-solving and debugging skills.</li>
-                <li>Designed an intuitive UI/UX with interactive SVG maps featuring zoom, pan, and multi-floor
-                  navigation for an engaging user experience.</li>
+                <li>Built a scalable, cloud-deployable web-based indoor navigation system for a multi-block academic building using graph algorithms and object-oriented design principles.</li>
+                <li>Implemented A* for shortest path and Dijkstra for nearest facility search, demonstrating strong algorithmic problem-solving and debugging skills.</li>
+                <li>Designed an intuitive UI/UX with interactive SVG maps featuring zoom, pan, and multi-floor navigation for an engaging user experience.</li>
                 <li>Deployed to Vercel cloud with CI/CD pipeline.</li>
               </ul>
             </div>
             <div class="project-tech">
-              <span>Next.js</span>
-              <span>TypeScript</span>
-              <span>A*</span>
-              <span>Dijkstra</span>
-              <span>SVG</span>
-              <span>Tailwind CSS</span>
+              <span>Next.js</span><span>TypeScript</span><span>A*</span><span>Dijkstra</span><span>SVG</span><span>Tailwind CSS</span>
             </div>
             <div class="project-links">
-              <a href="https://prp-indoor-navigation.vercel.app/navigation" target="_blank" rel="noopener">Live
-                Demo</a>
-              <a href="https://github.com/GauravHmm/PRP-Indoor-Navigation" target="_blank" rel="noopener">Source
-                Code</a>
+              <a href="https://prp-indoor-navigation.vercel.app/navigation" target="_blank" rel="noopener">Live Demo</a>
+              <a href="https://github.com/GauravHmm/PRP-Indoor-Navigation" target="_blank" rel="noopener">Source Code</a>
             </div>
           </div>
 
-          <!-- InsightRush -->
           <div class="project">
             <div class="project-top">
               <h3 class="project-name">InsightRush</h3>
@@ -1142,44 +818,32 @@
               <ul>
                 <li>Developed backend APIs for CSV ingestion and analytical query execution in a hackathon project.</li>
                 <li>Implemented schema and query validation to ensure safe and consistent data processing.</li>
-                <li>Built an approximate query-processing pipeline using sampling and statistical estimation for COUNT,
-                  SUM, and AVG operations.</li>
+                <li>Built an approximate query-processing pipeline using sampling and statistical estimation for COUNT, SUM, and AVG operations.</li>
                 <li>Collaborated with frontend to design API responses including execution metadata and results.</li>
               </ul>
             </div>
             <div class="project-tech">
-              <span>FastAPI</span>
-              <span>DuckDB</span>
-              <span>Python</span>
-              <span>Data Processing</span>
+              <span>FastAPI</span><span>DuckDB</span><span>Python</span><span>Data Processing</span>
             </div>
           </div>
 
-          <!-- Lumi -->
           <div class="project">
             <div class="project-top">
               <h3 class="project-name">Lumi</h3>
             </div>
             <div class="project-desc">
               <ul>
-                <li>Built a full-stack Flask application with SQLite-backed data models for health & productivity
-                  tracking.</li>
+                <li>Built a full-stack Flask application with SQLite-backed data models for health & productivity tracking.</li>
                 <li>Implemented EMA-based habit tracking for consistency scoring.</li>
                 <li>Developed server-side chart generation using Matplotlib with Base64 rendering.</li>
                 <li>Integrated AI-based routine analysis with fallback logic for reliability.</li>
               </ul>
             </div>
             <div class="project-tech">
-              <span>Python</span>
-              <span>Flask</span>
-              <span>SQLite</span>
-              <span>Matplotlib</span>
-              <span>LLM Integration</span>
+              <span>Python</span><span>Flask</span><span>SQLite</span><span>Matplotlib</span><span>LLM Integration</span>
             </div>
           </div>
 
-
-          <!-- 6502 Emulator -->
           <div class="project">
             <div class="project-top">
               <h3 class="project-name">6502 Emulator</h3>
@@ -1191,12 +855,10 @@
               </ul>
             </div>
             <div class="project-tech">
-              <span>Python</span>
-              <span>Systems Programming</span>
+              <span>Python</span><span>Systems Programming</span>
             </div>
           </div>
 
-          <!-- Keyboard-lock -->
           <div class="project">
             <div class="project-top">
               <h3 class="project-name">Keyboard-lock</h3>
@@ -1208,15 +870,13 @@
               </ul>
             </div>
             <div class="project-tech">
-              <span>Utility</span>
-              <span>Keyboard Remapping</span>
+              <span>Utility</span><span>Keyboard Remapping</span>
             </div>
           </div>
 
         </div>
       </section>
 
-      <!-- Education -->
       <section class="section" id="education">
         <h2 class="section-title">Education</h2>
         <div class="edu-item">
@@ -1226,7 +886,6 @@
         </div>
       </section>
 
-      <!-- Coursework -->
       <section class="section" id="coursework">
         <h2 class="section-title">Relevant Coursework</h2>
         <span class="coursework-label">Completed</span>
@@ -1241,133 +900,76 @@
           <span class="coursework-item current">Computer Networks</span>
         </div>
       </section>
-
     </main>
   </div>
 
-  <!-- Export PDF button -->
   <a class="export-btn" href="resume.html" target="_blank" title="View formatted resume">
     <svg viewBox="0 0 24 24">
       <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
       <polyline points="14 2 14 8 20 8" />
       <line x1="16" y1="13" x2="8" y2="13" />
       <line x1="16" y1="17" x2="8" y2="17" />
-      <polyline points="10 9 9 9 8 9" />
     </svg>
     Resume
   </a>
 
   <script>
-    // ── Theme Toggle ──
+    // Theme Toggle
     const themeToggleBtn = document.getElementById('themeToggle');
     const sunIcon = document.getElementById('sun-icon');
     const moonIcon = document.getElementById('moon-icon');
 
     themeToggleBtn.addEventListener('click', () => {
-      const currentTheme = document.documentElement.getAttribute('data-theme');
-      const newTheme = currentTheme === 'light' ? 'dark' : 'light';
-      document.documentElement.setAttribute('data-theme', newTheme);
-      
-      if (newTheme === 'light') {
-        sunIcon.style.display = 'none';
-        moonIcon.style.display = 'block';
-      } else {
-        sunIcon.style.display = 'block';
-        moonIcon.style.display = 'none';
-      }
+      const isLight = document.documentElement.getAttribute('data-theme') === 'light';
+      document.documentElement.setAttribute('data-theme', isLight ? 'dark' : 'light');
+      sunIcon.style.display = isLight ? 'block' : 'none';
+      moonIcon.style.display = isLight ? 'none' : 'block';
     });
 
-    // ── Custom Pencil Cursor with Ink Trail ──
-    const pencil = document.getElementById('cursorPencil');
-    let lastDotTime = 0;
-    const DOT_INTERVAL = 80; // ms between ink dots
-    let mouseX = 0, mouseY = 0;
-    let isMoving = false;
-    let moveTimeout;
-
+    // Pencil cursor — tip at element's (0,0)
+    const pen = document.getElementById('cursorPen');
     document.addEventListener('mousemove', e => {
-      mouseX = e.clientX;
-      mouseY = e.clientY;
-      pencil.style.left = mouseX + 'px';
-      pencil.style.top = mouseY + 'px';
-
-      // Create ink trail dots
-      const now = Date.now();
-      if (now - lastDotTime > DOT_INTERVAL) {
-        createInkDot(mouseX, mouseY);
-        lastDotTime = now;
-      }
-
-      isMoving = true;
-      clearTimeout(moveTimeout);
-      moveTimeout = setTimeout(() => { isMoving = false; }, 150);
+      pen.style.left = e.clientX + 'px';
+      pen.style.top = e.clientY + 'px';
     });
 
-    function createInkDot(x, y) {
-      const dot = document.createElement('div');
-      dot.className = 'ink-dot';
-      // Slight random offset for organic feel
-      const ox = (Math.random() - 0.5) * 6;
-      const oy = (Math.random() - 0.5) * 6;
-      dot.style.left = (x + ox) + 'px';
-      dot.style.top = (y + oy) + 'px';
-      // Vary size slightly
-      const size = 2 + Math.random() * 3;
-      dot.style.width = size + 'px';
-      dot.style.height = size + 'px';
-      // Random pastel color from palette
-      const colors = [
-        'var(--accent-green)',
-        'var(--accent-orange)',
-        'var(--accent-pink)',
-        'var(--accent-blue)',
-        'var(--accent-yellow)'
-      ];
-      dot.style.background = colors[Math.floor(Math.random() * colors.length)];
-      document.body.appendChild(dot);
-
-      // Fade out and remove
-      requestAnimationFrame(() => {
-        dot.classList.add('fading');
-      });
-      setTimeout(() => dot.remove(), 900);
-    }
-
-    // Hover state for cursor
-    document.querySelectorAll('a, button, .skill, .project, .coursework-item').forEach(el => {
-      el.addEventListener('mouseenter', () => pencil.classList.add('hovering'));
-      el.addEventListener('mouseleave', () => pencil.classList.remove('hovering'));
+    // Hover feedback on interactive elements
+    const interactiveEls = document.querySelectorAll('a, button, .skill, .project, .coursework-item');
+    interactiveEls.forEach(el => {
+      el.addEventListener('mouseenter', () => pen.classList.add('hover'));
+      el.addEventListener('mouseleave', () => pen.classList.remove('hover'));
     });
 
-    // ── Mobile nav toggle ──
+    // Mobile nav toggle
     const navToggle = document.getElementById('navToggle');
     const navLinks = document.getElementById('navLinks');
-    navToggle.addEventListener('click', () => {
-      navLinks.classList.toggle('open');
-    });
-    // Close menu when a link is clicked
+    navToggle.addEventListener('click', () => navLinks.classList.toggle('open'));
     navLinks.querySelectorAll('a').forEach(link => {
       link.addEventListener('click', () => navLinks.classList.remove('open'));
     });
 
-    // ── Active nav link tracking ──
+    // Active nav tracking — fixed to handle bottom-of-page
     const sections = document.querySelectorAll('.section[id]');
     const navAnchors = document.querySelectorAll('.nav-links a');
 
     function updateActiveNav() {
       let current = '';
-      const offset = 120;
-      sections.forEach(section => {
-        const top = section.offsetTop - offset;
-        if (window.scrollY >= top) {
-          current = section.getAttribute('id');
+      const scrollY = window.scrollY;
+      const triggerLine = scrollY + 180;
+
+      sections.forEach(sec => {
+        if (sec.offsetTop <= triggerLine) {
+          current = sec.id;
         }
       });
+
+      // If near bottom of page, activate last section
+      if ((window.innerHeight + scrollY) >= document.body.scrollHeight - 80) {
+        current = sections[sections.length - 1].id;
+      }
+
       navAnchors.forEach(a => {
-        a.classList.remove('active');
-        if (a.getAttribute('href') === '#' + current) {
-          a.classList.add('active');
-        }
+        a.classList.toggle('active', a.getAttribute('href') === '#' + current);
       });
     }
 
