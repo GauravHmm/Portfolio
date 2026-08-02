@@ -72,61 +72,22 @@
 
     body {
       font-family: 'Comic Neue', cursive, sans-serif;
-      background: var(--bg);
+      background-color: var(--bg);
+      background-image: radial-gradient(circle, var(--paper-lines) 1.2px, transparent 1.2px);
+      background-size: 22px 22px;
       color: var(--text);
       line-height: 1.7;
       cursor: none;
       -webkit-font-smoothing: antialiased;
-      transition: background 0.35s, color 0.35s;
+      transition: background-color 0.35s, color 0.35s;
       overflow-x: hidden;
     }
 
-    /* ── The Notebook Paper ──
-       This is the main visual wrapper that makes the whole page
-       look like a real notebook sheet with ruled lines + margin */
-    .notebook {
-      max-width: 1200px;
-      margin: 0 auto;
-      min-height: 100vh;
-      background: var(--paper);
-      /* Ruled lines */
+    [data-theme="light"] body {
       background-image:
-        repeating-linear-gradient(
-          transparent,
-          transparent 31px,
-          var(--paper-lines) 31px,
-          var(--paper-lines) 32px
-        );
-      background-size: 100% 32px;
-      position: relative;
-      box-shadow: 0 0 60px rgba(0, 0, 0, 0.3);
-      transition: background 0.35s;
-    }
-    /* Red margin line */
-    .notebook::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      bottom: 0;
-      left: 80px;
-      width: 2px;
-      background: var(--margin-line);
-      z-index: 1;
-    }
-    /* Spiral binding holes */
-    .notebook::after {
-      content: '';
-      position: absolute;
-      top: 0;
-      bottom: 0;
-      left: 24px;
-      width: 32px;
-      background-image:
-        radial-gradient(circle 7px at 16px 0, transparent 6px, var(--paper) 6px, var(--paper) 7px, transparent 7px);
-      background-size: 32px 64px;
-      background-position: 0 calc(var(--nav-h) + 20px);
-      z-index: 2;
-      pointer-events: none;
+        linear-gradient(var(--paper-lines) 1px, transparent 1px),
+        linear-gradient(90deg, var(--paper-lines) 1px, transparent 1px);
+      background-size: 28px 28px;
     }
 
     /* ── Pencil Cursor ── */
@@ -261,12 +222,14 @@
 
     /* ── Page Layout ── */
     .page-content {
-      padding: calc(var(--nav-h) + 2.5rem) 3rem 4rem 110px;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: calc(var(--nav-h) + 2.5rem) 3rem 4rem;
+      min-height: 100vh;
       display: grid;
-      grid-template-columns: 280px 1fr;
+      grid-template-columns: 300px 1fr;
       gap: 4rem;
       position: relative;
-      z-index: 3;
     }
 
     /* ── Doodle Decorations (visible!) ── */
@@ -320,6 +283,30 @@
       color: var(--text-dim);
       margin-bottom: 2rem;
       font-style: italic;
+    }
+
+    /* ── Squiggly dividers between sections ── */
+    .squiggly-divider {
+      width: 100%;
+      height: 12px;
+      margin: 0.5rem 0 1.5rem;
+      background: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 12' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 6Q8 1 16 6T32 6T48 6T64 6T80 6T96 6T112 6T128 6T144 6T160 6T176 6T192 6T200 6' fill='none' stroke='%236a7488' stroke-width='1.5' stroke-linecap='round' opacity='0.35'/%3E%3C/svg%3E") repeat-x center;
+      background-size: 100px 12px;
+    }
+
+    /* ── Inline doodle icons next to section titles ── */
+    .section-icon {
+      display: inline-block;
+      width: 22px;
+      height: 22px;
+      vertical-align: middle;
+      margin-right: 6px;
+      opacity: 0.7;
+    }
+    .section-icon svg {
+      width: 100%; height: 100%;
+      stroke: var(--green); fill: none;
+      stroke-width: 2; stroke-linecap: round; stroke-linejoin: round;
     }
 
     .sidebar-section { margin-bottom: 2rem; }
@@ -519,6 +506,11 @@
       font-size: 0.85rem;
     }
 
+    /* Random slight tilt on each project for organic feel */
+    .project:nth-child(odd) { transform: rotate(0.3deg); }
+    .project:nth-child(even) { transform: rotate(-0.2deg); }
+    .project:hover { transform: translateY(-3px) rotate(0deg) !important; }
+
     .project-tech {
       display: flex;
       flex-wrap: wrap;
@@ -576,6 +568,31 @@
       border-radius: 2px;
     }
     .edu-item:hover { box-shadow: 3px 3px 0px var(--shadow); }
+
+    /* About text with a scribble bracket */
+    .about-bracket {
+      border-left: 3px solid var(--green);
+      padding-left: 1rem;
+      position: relative;
+    }
+    .about-bracket::before {
+      content: '';
+      position: absolute;
+      left: -7px; top: -4px;
+      width: 14px; height: 14px;
+      border-top: 3px solid var(--green);
+      border-left: 3px solid var(--green);
+      border-radius: 6px 0 0 0;
+    }
+    .about-bracket::after {
+      content: '';
+      position: absolute;
+      left: -7px; bottom: -4px;
+      width: 14px; height: 14px;
+      border-bottom: 3px solid var(--green);
+      border-left: 3px solid var(--green);
+      border-radius: 0 0 0 6px;
+    }
 
     .edu-degree { font-family: 'Caveat', cursive; font-size: 1.25rem; font-weight: 700; }
     .edu-school { font-size: 0.88rem; color: var(--text-sec); }
@@ -655,7 +672,6 @@
 
     /* ── Responsive ── */
     @media (max-width: 900px) {
-      .notebook::before, .notebook::after { display: none; }
       .page-content {
         grid-template-columns: 1fr;
         gap: 2.5rem;
@@ -695,17 +711,17 @@
     @media print {
       * { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
       html, body { background: #fff !important; color: #111 !important; cursor: auto !important; font-size: 10px; }
-      .cursor-pen,.footer-badge,.export-btn,.navbar,.doodle { display: none !important; }
-      .notebook { box-shadow: none; background: #fff; }
-      .notebook::before, .notebook::after { display: none; }
+      .cursor-pen,.footer-badge,.export-btn,.navbar,.doodle,.squiggly-divider { display: none !important; }
       .page-content { max-width:100%;padding:0.5cm;gap:1.5rem;grid-template-columns:220px 1fr; }
       .sidebar { position: static; }
-      .project { break-inside:avoid;page-break-inside:avoid;padding:0.7rem; }
+      .project { break-inside:avoid;page-break-inside:avoid;padding:0.7rem;transform:none!important; }
       .project::before { display: none; }
       .edu-item::before { display: none; }
-      .project:hover, .edu-item:hover { transform:none;box-shadow:none; }
+      .project:hover, .edu-item:hover { transform:none!important;box-shadow:none; }
       .project-links a::after { content: none; }
       .section-title::after { display: none; }
+      .about-bracket { border:none; padding-left:0; }
+      .about-bracket::before, .about-bracket::after { display: none; }
       @page { size: A4; margin: 1cm; }
     }
   </style>
@@ -746,17 +762,15 @@
     </div>
   </nav>
 
-  <!-- The Notebook -->
-  <div class="notebook">
-    <div class="page-content">
+  <div class="page-content">
 
-      <!-- Doodle decorations in the margins -->
-      <div class="doodle d-star"><svg width="44" height="44" viewBox="0 0 44 44"><path d="M22 2L26 16L40 16L29 24L33 40L22 30L11 40L15 24L4 16L18 16Z"/></svg></div>
-      <div class="doodle d-swirl"><svg width="48" height="48" viewBox="0 0 48 48"><path d="M24 24Q30 18 27 12Q24 4 16 10Q8 16 14 24Q20 34 32 28Q42 20 34 10Q26 0 14 8"/></svg></div>
-      <div class="doodle d-arrow"><svg width="56" height="26" viewBox="0 0 56 26"><path d="M4 13Q14 3 28 13T52 13"/><path d="M45 7L52 13L45 19"/></svg></div>
-      <div class="doodle d-heart"><svg width="36" height="36" viewBox="0 0 36 36"><path d="M18 30 Q4 20 4 12 Q4 4 12 4 Q18 4 18 12 Q18 4 24 4 Q32 4 32 12 Q32 20 18 30Z"/></svg></div>
-      <div class="doodle d-bulb"><svg width="40" height="52" viewBox="0 0 40 52"><circle cx="20" cy="18" r="14"/><path d="M14 32L26 32"/><path d="M15 36L25 36"/><path d="M17 40L23 40"/><path d="M20 4V0"/><path d="M6 8L2 4"/><path d="M34 8L38 4"/><path d="M2 18H0"/><path d="M40 18H38"/></svg></div>
-      <div class="doodle d-coffee"><svg width="42" height="42" viewBox="0 0 42 42"><path d="M6 16H30V34Q30 40 18 40Q6 40 6 34Z"/><path d="M30 20H36Q40 20 40 26Q40 32 36 32H30"/><path d="M12 12Q12 6 14 4"/><path d="M18 12Q18 6 20 4"/><path d="M24 12Q24 6 26 4"/></svg></div>
+    <!-- Doodle decorations in the margins -->
+    <div class="doodle d-star"><svg width="44" height="44" viewBox="0 0 44 44"><path d="M22 2L26 16L40 16L29 24L33 40L22 30L11 40L15 24L4 16L18 16Z"/></svg></div>
+    <div class="doodle d-swirl"><svg width="48" height="48" viewBox="0 0 48 48"><path d="M24 24Q30 18 27 12Q24 4 16 10Q8 16 14 24Q20 34 32 28Q42 20 34 10Q26 0 14 8"/></svg></div>
+    <div class="doodle d-arrow"><svg width="56" height="26" viewBox="0 0 56 26"><path d="M4 13Q14 3 28 13T52 13"/><path d="M45 7L52 13L45 19"/></svg></div>
+    <div class="doodle d-heart"><svg width="36" height="36" viewBox="0 0 36 36"><path d="M18 30 Q4 20 4 12 Q4 4 12 4 Q18 4 18 12 Q18 4 24 4 Q32 4 32 12 Q32 20 18 30Z"/></svg></div>
+    <div class="doodle d-bulb"><svg width="40" height="52" viewBox="0 0 40 52"><circle cx="20" cy="18" r="14"/><path d="M14 32L26 32"/><path d="M15 36L25 36"/><path d="M17 40L23 40"/><path d="M20 4V0"/><path d="M6 8L2 4"/><path d="M34 8L38 4"/><path d="M2 18H0"/><path d="M40 18H38"/></svg></div>
+    <div class="doodle d-coffee"><svg width="42" height="42" viewBox="0 0 42 42"><path d="M6 16H30V34Q30 40 18 40Q6 40 6 34Z"/><path d="M30 20H36Q40 20 40 26Q40 32 36 32H30"/><path d="M12 12Q12 6 14 4"/><path d="M18 12Q18 6 20 4"/><path d="M24 12Q24 6 26 4"/></svg></div>
 
       <!-- Sidebar -->
       <aside class="sidebar">
@@ -804,10 +818,11 @@
         </div>
       </aside>
 
-      <!-- Main -->
-      <main class="main">
-        <section class="section" id="about">
-          <h2 class="section-title">About</h2>
+    <!-- Main -->
+    <main class="main">
+      <section class="section" id="about">
+        <h2 class="section-title"><span class="section-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 4-6 8-6s8 2 8 6"/></svg></span>About</h2>
+        <div class="about-bracket">
           <p class="about-text">
             Third-year Computer Science student at VIT with strong foundations in programming,
             data structures, algorithms, and object-oriented design. Experienced in building
@@ -816,10 +831,13 @@
             turning ideas into working software. Currently expanding into systems-level topics
             including operating systems and computer networking.
           </p>
-        </section>
+        </div>
+      </section>
 
-        <section class="section" id="projects">
-          <h2 class="section-title">Projects</h2>
+      <div class="squiggly-divider"></div>
+
+      <section class="section" id="projects">
+        <h2 class="section-title"><span class="section-icon"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg></span>Projects</h2>
           <div class="projects-grid">
 
             <div class="project">
@@ -910,19 +928,23 @@
             </div>
 
           </div>
-        </section>
+      </section>
 
-        <section class="section" id="education">
-          <h2 class="section-title">Education</h2>
-          <div class="edu-item">
-            <p class="edu-degree">B.Tech in Computer Science and Engineering</p>
-            <p class="edu-school">Vellore Institute of Technology (VIT), Vellore</p>
-            <p class="edu-year">2024 – 2028</p>
-          </div>
-        </section>
+      <div class="squiggly-divider"></div>
 
-        <section class="section" id="coursework">
-          <h2 class="section-title">Relevant Coursework</h2>
+      <section class="section" id="education">
+        <h2 class="section-title"><span class="section-icon"><svg viewBox="0 0 24 24"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg></span>Education</h2>
+        <div class="edu-item">
+          <p class="edu-degree">B.Tech in Computer Science and Engineering</p>
+          <p class="edu-school">Vellore Institute of Technology (VIT), Vellore</p>
+          <p class="edu-year">2024 – 2028</p>
+        </div>
+      </section>
+
+      <div class="squiggly-divider"></div>
+
+      <section class="section" id="coursework">
+        <h2 class="section-title"><span class="section-icon"><svg viewBox="0 0 24 24"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg></span>Relevant Coursework</h2>
           <span class="coursework-label">Completed</span>
           <div class="coursework-list" style="margin-bottom: 0.75rem;">
             <span class="coursework-item">Data Structures & Algorithms</span>
@@ -934,9 +956,8 @@
             <span class="coursework-item current">Operating Systems</span>
             <span class="coursework-item current">Computer Networks</span>
           </div>
-        </section>
-      </main>
-    </div>
+      </section>
+    </main>
   </div>
 
   <a class="export-btn" href="resume.html" target="_blank" title="View formatted resume">
@@ -978,15 +999,18 @@
     navToggle.addEventListener('click', () => navLinks.classList.toggle('open'));
     navLinks.querySelectorAll('a').forEach(l => l.addEventListener('click', () => navLinks.classList.remove('open')));
 
-    // Nav active tracking (fixed)
+    // Nav active tracking — uses getBoundingClientRect for accuracy
     const secs = document.querySelectorAll('.section[id]');
     const navAs = document.querySelectorAll('.nav-links a');
     function updateNav() {
       let cur = '';
-      const trigger = window.scrollY + 200;
-      secs.forEach(s => { if (s.offsetTop <= trigger) cur = s.id; });
+      // Use getBoundingClientRect for absolute accuracy regardless of nesting
+      secs.forEach(s => {
+        const rect = s.getBoundingClientRect();
+        if (rect.top <= 200) cur = s.id;
+      });
       // Bottom of page → last section
-      if ((window.innerHeight + window.scrollY) >= document.body.scrollHeight - 80) {
+      if ((window.innerHeight + window.scrollY) >= document.body.scrollHeight - 100) {
         cur = secs[secs.length - 1].id;
       }
       navAs.forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#' + cur));
