@@ -107,6 +107,60 @@
       transform: scale(1.2) rotate(-10deg);
     }
 
+    /* Ink trail dots */
+    .ink-dot {
+      position: fixed;
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 9998;
+      opacity: 0.5;
+      animation: ink-fade 1.2s ease-out forwards;
+    }
+    @keyframes ink-fade {
+      0% { transform: scale(1); opacity: 0.5; }
+      100% { transform: scale(0); opacity: 0; }
+    }
+
+    /* Click splatter effect */
+    .click-splatter {
+      position: fixed;
+      pointer-events: none;
+      z-index: 9997;
+    }
+    .splatter-ring {
+      position: absolute;
+      border-radius: 50%;
+      border: 2.5px solid var(--green);
+      animation: splatter-expand 0.7s ease-out forwards;
+      transform: translate(-50%, -50%);
+    }
+    @keyframes splatter-expand {
+      0% { width: 0; height: 0; opacity: 0.8; }
+      100% { width: 120px; height: 120px; opacity: 0; }
+    }
+    .splatter-dot {
+      position: absolute;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      animation: splatter-fly 0.6s ease-out forwards;
+    }
+    @keyframes splatter-fly {
+      0% { transform: translate(0, 0) scale(1); opacity: 0.8; }
+      100% { opacity: 0; }
+    }
+
+    /* Section entrance animation */
+    .section {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+    .section.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
     *, *::before, *::after { cursor: none !important; }
 
     /* ── Nav ── */
@@ -362,15 +416,18 @@
       padding: 0.3rem 0.65rem;
       border: 2.5px solid var(--border);
       border-radius: 255px 15px 225px 15px / 15px 225px 15px 255px;
-      transition: all 0.2s;
+      transition: all 0.25s;
       background: var(--paper);
     }
     .skill:hover {
       border-color: var(--orange);
       color: var(--text);
-      transform: rotate(-2deg) scale(1.05);
-      box-shadow: 3px 3px 0px var(--shadow);
+      transform: rotate(-2deg) scale(1.08);
+      box-shadow: 3px 3px 0px var(--shadow), 0 0 12px rgba(240, 168, 110, 0.25);
     }
+    .skill:nth-child(3n+1):hover { border-color: var(--green); box-shadow: 3px 3px 0px var(--shadow), 0 0 12px rgba(126, 232, 180, 0.25); }
+    .skill:nth-child(3n+2):hover { border-color: var(--blue); box-shadow: 3px 3px 0px var(--shadow), 0 0 12px rgba(124, 184, 224, 0.25); }
+    .skill:nth-child(3n):hover { border-color: var(--pink); box-shadow: 3px 3px 0px var(--shadow), 0 0 12px rgba(232, 135, 154, 0.25); }
 
     .languages-text {
       font-size: 0.9rem;
@@ -425,8 +482,8 @@
     }
     .project:hover {
       border-color: var(--green);
-      transform: translateY(-3px);
-      box-shadow: 5px 5px 0px var(--shadow);
+      transform: translateY(-3px) rotate(0deg) !important;
+      box-shadow: 5px 5px 0px var(--shadow), 0 0 20px rgba(126, 232, 180, 0.12);
     }
 
     /* Colored tape strip on top of each card */
@@ -507,9 +564,9 @@
     }
 
     /* Random slight tilt on each project for organic feel */
-    .project:nth-child(odd) { transform: rotate(0.3deg); }
-    .project:nth-child(even) { transform: rotate(-0.2deg); }
-    .project:hover { transform: translateY(-3px) rotate(0deg) !important; }
+    .project:nth-child(odd) { transform: rotate(0.4deg); }
+    .project:nth-child(even) { transform: rotate(-0.3deg); }
+    .project:nth-child(3) { transform: rotate(0.2deg); }
 
     .project-tech {
       display: flex;
@@ -672,6 +729,7 @@
 
     /* ── Responsive ── */
     @media (max-width: 900px) {
+      .section { opacity: 1; transform: none; }
       .page-content {
         grid-template-columns: 1fr;
         gap: 2.5rem;
@@ -982,15 +1040,80 @@
       moon.style.display = isLight ? 'none' : 'block';
     });
 
-    // Pencil cursor
+    // Pencil cursor + ink trail
     const pen = document.getElementById('cursorPen');
+    let lastTrailTime = 0;
+    const TRAIL_INTERVAL = 60;
+    const trailColors = [
+      'var(--green)', 'var(--orange)', 'var(--pink)',
+      'var(--blue)', 'var(--yellow)', 'var(--purple)'
+    ];
+
     document.addEventListener('mousemove', e => {
       pen.style.left = e.clientX + 'px';
       pen.style.top = e.clientY + 'px';
+
+      // Ink trail
+      const now = Date.now();
+      if (now - lastTrailTime > TRAIL_INTERVAL) {
+        const dot = document.createElement('div');
+        dot.className = 'ink-dot';
+        const size = 3 + Math.random() * 4;
+        dot.style.width = size + 'px';
+        dot.style.height = size + 'px';
+        dot.style.left = (e.clientX + (Math.random() - 0.5) * 8) + 'px';
+        dot.style.top = (e.clientY + (Math.random() - 0.5) * 8) + 'px';
+        dot.style.background = trailColors[Math.floor(Math.random() * trailColors.length)];
+        document.body.appendChild(dot);
+        setTimeout(() => dot.remove(), 1300);
+        lastTrailTime = now;
+      }
     });
+
+    // Hover feedback
     document.querySelectorAll('a, button, .skill, .project, .coursework-item').forEach(el => {
       el.addEventListener('mouseenter', () => pen.classList.add('hover'));
       el.addEventListener('mouseleave', () => pen.classList.remove('hover'));
+    });
+
+    // Click splatter effect
+    document.addEventListener('click', e => {
+      const splatter = document.createElement('div');
+      splatter.className = 'click-splatter';
+      splatter.style.left = e.clientX + 'px';
+      splatter.style.top = e.clientY + 'px';
+
+      // Expanding ring
+      const ring = document.createElement('div');
+      ring.className = 'splatter-ring';
+      ring.style.borderColor = trailColors[Math.floor(Math.random() * trailColors.length)];
+      splatter.appendChild(ring);
+
+      // Flying ink dots
+      for (let i = 0; i < 8; i++) {
+        const dot = document.createElement('div');
+        dot.className = 'splatter-dot';
+        const angle = (Math.PI * 2 / 8) * i + (Math.random() - 0.5) * 0.5;
+        const dist = 25 + Math.random() * 40;
+        const tx = Math.cos(angle) * dist;
+        const ty = Math.sin(angle) * dist;
+        const size = 3 + Math.random() * 5;
+        dot.style.width = size + 'px';
+        dot.style.height = size + 'px';
+        dot.style.background = trailColors[Math.floor(Math.random() * trailColors.length)];
+        dot.style.animation = `splatter-fly 0.5s ease-out forwards`;
+        dot.style.setProperty('--tx', tx + 'px');
+        dot.style.setProperty('--ty', ty + 'px');
+        // Use inline keyframe via transform
+        dot.animate([
+          { transform: 'translate(0,0) scale(1)', opacity: 0.7 },
+          { transform: `translate(${tx}px, ${ty}px) scale(0)`, opacity: 0 }
+        ], { duration: 500, easing: 'ease-out' });
+        splatter.appendChild(dot);
+      }
+
+      document.body.appendChild(splatter);
+      setTimeout(() => splatter.remove(), 800);
     });
 
     // Mobile nav
@@ -999,24 +1122,50 @@
     navToggle.addEventListener('click', () => navLinks.classList.toggle('open'));
     navLinks.querySelectorAll('a').forEach(l => l.addEventListener('click', () => navLinks.classList.remove('open')));
 
-    // Nav active tracking — uses getBoundingClientRect for accuracy
+    // Nav active tracking — click override + scroll detection
     const secs = document.querySelectorAll('.section[id]');
     const navAs = document.querySelectorAll('.nav-links a');
+    let navClickOverride = null;
+
+    // When a nav link is clicked, force it active and pause scroll tracking briefly
+    navAs.forEach(a => {
+      a.addEventListener('click', () => {
+        navClickOverride = a.getAttribute('href').slice(1);
+        navAs.forEach(n => n.classList.remove('active'));
+        a.classList.add('active');
+        // Release override after scroll settles
+        setTimeout(() => { navClickOverride = null; }, 1000);
+      });
+    });
+
     function updateNav() {
+      if (navClickOverride) return; // Skip if user just clicked a nav link
+
       let cur = '';
-      // Use getBoundingClientRect for absolute accuracy regardless of nesting
+      // Find which section's top has crossed the trigger line
       secs.forEach(s => {
         const rect = s.getBoundingClientRect();
-        if (rect.top <= 200) cur = s.id;
+        // Section top is within 150px of viewport top
+        if (rect.top <= 150) cur = s.id;
       });
-      // Bottom of page → last section
-      if ((window.innerHeight + window.scrollY) >= document.body.scrollHeight - 100) {
+      // Near bottom of page → last section
+      if ((window.innerHeight + window.scrollY) >= document.body.scrollHeight - 60) {
         cur = secs[secs.length - 1].id;
       }
       navAs.forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#' + cur));
     }
     window.addEventListener('scroll', updateNav, { passive: true });
     updateNav();
+
+    // Section entrance animation (IntersectionObserver)
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, { threshold: 0.1 });
+    secs.forEach(s => observer.observe(s));
   </script>
 </body>
 
