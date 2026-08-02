@@ -102,6 +102,7 @@
       overflow: visible;
       filter: drop-shadow(1px 2px 2px rgba(0, 0, 0, 0.4));
       transition: transform 0.12s ease;
+      transform-origin: 2px 24px;
     }
     .cursor-pen.hover svg {
       transform: scale(1.2) rotate(-10deg);
@@ -1050,8 +1051,9 @@
     ];
 
     document.addEventListener('mousemove', e => {
-      pen.style.left = e.clientX + 'px';
-      pen.style.top = e.clientY + 'px';
+      // Offset by 2px left and 24px top so the (0,0) tip in the viewBox (-2, -24, 28, 28) aligns with the exact mouse pixel
+      pen.style.left = (e.clientX - 2) + 'px';
+      pen.style.top = (e.clientY - 24) + 'px';
 
       // Ink trail
       const now = Date.now();
@@ -1061,8 +1063,9 @@
         const size = 3 + Math.random() * 4;
         dot.style.width = size + 'px';
         dot.style.height = size + 'px';
-        dot.style.left = (e.clientX + (Math.random() - 0.5) * 8) + 'px';
-        dot.style.top = (e.clientY + (Math.random() - 0.5) * 8) + 'px';
+        // Center the dot exactly on the pointer coordinate
+        dot.style.left = (e.clientX - size / 2) + 'px';
+        dot.style.top = (e.clientY - size / 2) + 'px';
         dot.style.background = trailColors[Math.floor(Math.random() * trailColors.length)];
         document.body.appendChild(dot);
         setTimeout(() => dot.remove(), 1300);
