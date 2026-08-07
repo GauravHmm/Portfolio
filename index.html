@@ -96,6 +96,7 @@
       pointer-events: none;
       z-index: 9999;
     }
+
     .cursor-pen svg {
       width: 28px;
       height: 28px;
@@ -104,6 +105,7 @@
       transition: transform 0.12s ease;
       transform-origin: 2px 24px;
     }
+
     .cursor-pen.hover svg {
       transform: scale(1.2) rotate(-10deg);
     }
@@ -117,9 +119,17 @@
       opacity: 0.5;
       animation: ink-fade 1.2s ease-out forwards;
     }
+
     @keyframes ink-fade {
-      0% { transform: scale(1); opacity: 0.5; }
-      100% { transform: scale(0); opacity: 0; }
+      0% {
+        transform: scale(1);
+        opacity: 0.5;
+      }
+
+      100% {
+        transform: scale(0);
+        opacity: 0;
+      }
     }
 
     /* Click splatter effect */
@@ -128,6 +138,7 @@
       pointer-events: none;
       z-index: 9997;
     }
+
     .splatter-ring {
       position: absolute;
       border-radius: 50%;
@@ -135,10 +146,21 @@
       animation: splatter-expand 0.7s ease-out forwards;
       transform: translate(-50%, -50%);
     }
+
     @keyframes splatter-expand {
-      0% { width: 0; height: 0; opacity: 0.8; }
-      100% { width: 120px; height: 120px; opacity: 0; }
+      0% {
+        width: 0;
+        height: 0;
+        opacity: 0.8;
+      }
+
+      100% {
+        width: 120px;
+        height: 120px;
+        opacity: 0;
+      }
     }
+
     .splatter-dot {
       position: absolute;
       width: 6px;
@@ -146,9 +168,16 @@
       border-radius: 50%;
       animation: splatter-fly 0.6s ease-out forwards;
     }
+
     @keyframes splatter-fly {
-      0% { transform: translate(0, 0) scale(1); opacity: 0.8; }
-      100% { opacity: 0; }
+      0% {
+        transform: translate(0, 0) scale(1);
+        opacity: 0.8;
+      }
+
+      100% {
+        opacity: 0;
+      }
     }
 
     /* Section entrance animation */
@@ -157,12 +186,17 @@
       transform: translateY(30px);
       transition: opacity 0.6s ease, transform 0.6s ease;
     }
+
     .section.visible {
       opacity: 1;
       transform: translateY(0);
     }
 
-    *, *::before, *::after { cursor: none !important; }
+    *,
+    *::before,
+    *::after {
+      cursor: none !important;
+    }
 
     /* ── Nav ── */
     .navbar {
@@ -198,6 +232,7 @@
       text-decoration: none;
       position: relative;
     }
+
     /* Hand-drawn circle around brand */
     .nav-brand::after {
       content: '';
@@ -207,6 +242,7 @@
       border-radius: 58% 42% 55% 45% / 45% 55% 42% 58%;
       transition: all 0.25s;
     }
+
     .nav-brand:hover::after {
       border-color: var(--orange);
       transform: rotate(8deg) scale(1.08);
@@ -228,11 +264,13 @@
       border-radius: 255px 15px 225px 15px / 15px 225px 15px 255px;
       transition: all 0.2s;
     }
+
     .nav-links a:hover {
       color: var(--orange);
       border-color: var(--orange);
       box-shadow: 2px 2px 0px var(--shadow);
     }
+
     .nav-links a.active {
       color: var(--green);
       border-color: var(--green);
@@ -247,9 +285,13 @@
       color: var(--text-sec);
       padding: 0.35rem;
     }
+
     .nav-hamburger svg {
-      width: 22px; height: 22px;
-      stroke: currentColor; fill: none; stroke-width: 2.5;
+      width: 22px;
+      height: 22px;
+      stroke: currentColor;
+      fill: none;
+      stroke-width: 2.5;
     }
 
     .theme-toggle {
@@ -259,20 +301,27 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      width: 36px; height: 36px;
+      width: 36px;
+      height: 36px;
       border-radius: 52% 48% 55% 45% / 48% 52% 45% 55%;
       transition: all 0.25s;
     }
+
     .theme-toggle:hover {
       border-color: var(--orange);
       color: var(--orange);
       transform: rotate(20deg);
       box-shadow: 2px 2px 0px var(--shadow);
     }
+
     .theme-toggle svg {
-      width: 17px; height: 17px;
-      stroke: currentColor; fill: none;
-      stroke-width: 2; stroke-linecap: round; stroke-linejoin: round;
+      width: 17px;
+      height: 17px;
+      stroke: currentColor;
+      fill: none;
+      stroke-width: 2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
     }
 
     /* ── Page Layout ── */
@@ -295,20 +344,73 @@
       color: var(--text-dim);
       opacity: 0.22;
     }
+
     .doodle svg {
-      stroke: currentColor; fill: none;
-      stroke-width: 2; stroke-linecap: round; stroke-linejoin: round;
+      stroke: currentColor;
+      fill: none;
+      stroke-width: 2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
     }
-    .d-star { top: 110px; right: 50px; color: var(--yellow); opacity: 0.3; animation: bob 6s ease-in-out infinite; }
-    .d-swirl { top: 480px; right: 30px; color: var(--blue); opacity: 0.2; animation: bob 8s ease-in-out infinite 2s; }
-    .d-arrow { top: 780px; right: 70px; color: var(--green); opacity: 0.25; animation: bob 7s ease-in-out infinite 1s; }
-    .d-heart { top: 280px; right: 100px; color: var(--pink); opacity: 0.2; animation: bob 9s ease-in-out infinite 3s; }
-    .d-bulb { bottom: 300px; right: 40px; color: var(--yellow); opacity: 0.25; animation: bob 5s ease-in-out infinite 0.5s; }
-    .d-coffee { bottom: 120px; right: 90px; color: var(--orange); opacity: 0.18; animation: bob 7s ease-in-out infinite 4s; }
+
+    .d-star {
+      top: 110px;
+      right: 50px;
+      color: var(--yellow);
+      opacity: 0.3;
+      animation: bob 6s ease-in-out infinite;
+    }
+
+    .d-swirl {
+      top: 480px;
+      right: 30px;
+      color: var(--blue);
+      opacity: 0.2;
+      animation: bob 8s ease-in-out infinite 2s;
+    }
+
+    .d-arrow {
+      top: 780px;
+      right: 70px;
+      color: var(--green);
+      opacity: 0.25;
+      animation: bob 7s ease-in-out infinite 1s;
+    }
+
+    .d-heart {
+      top: 280px;
+      right: 100px;
+      color: var(--pink);
+      opacity: 0.2;
+      animation: bob 9s ease-in-out infinite 3s;
+    }
+
+    .d-bulb {
+      bottom: 300px;
+      right: 40px;
+      color: var(--yellow);
+      opacity: 0.25;
+      animation: bob 5s ease-in-out infinite 0.5s;
+    }
+
+    .d-coffee {
+      bottom: 120px;
+      right: 90px;
+      color: var(--orange);
+      opacity: 0.18;
+      animation: bob 7s ease-in-out infinite 4s;
+    }
 
     @keyframes bob {
-      0%, 100% { transform: translateY(0) rotate(0); }
-      50% { transform: translateY(-12px) rotate(5deg); }
+
+      0%,
+      100% {
+        transform: translateY(0) rotate(0);
+      }
+
+      50% {
+        transform: translateY(-12px) rotate(5deg);
+      }
     }
 
     /* ── Fireflies (Dark Mode Only) ── */
@@ -324,21 +426,86 @@
       opacity: 0;
       animation: firefly-float 10s infinite ease-in-out;
     }
-    .f-1 { top: 150px; left: 10%; background: var(--yellow); box-shadow: 0 0 10px 2px var(--yellow); animation-delay: 0s; animation-duration: 14s; }
-    .f-2 { top: 350px; right: 15%; background: var(--green); box-shadow: 0 0 10px 2px var(--green); animation-delay: 2s; animation-duration: 18s; }
-    .f-3 { top: 650px; left: 12%; background: var(--blue); box-shadow: 0 0 10px 2px var(--blue); animation-delay: 4s; animation-duration: 12s; }
-    .f-4 { top: 800px; right: 20%; background: var(--pink); box-shadow: 0 0 10px 2px var(--pink); animation-delay: 6s; animation-duration: 16s; }
-    .f-5 { bottom: 200px; left: 25%; background: var(--orange); box-shadow: 0 0 10px 2px var(--orange); animation-delay: 1s; animation-duration: 22s; }
-    
-    [data-theme="light"] .firefly { display: none !important; }
+
+    .f-1 {
+      top: 150px;
+      left: 10%;
+      background: var(--yellow);
+      box-shadow: 0 0 10px 2px var(--yellow);
+      animation-delay: 0s;
+      animation-duration: 14s;
+    }
+
+    .f-2 {
+      top: 350px;
+      right: 15%;
+      background: var(--green);
+      box-shadow: 0 0 10px 2px var(--green);
+      animation-delay: 2s;
+      animation-duration: 18s;
+    }
+
+    .f-3 {
+      top: 650px;
+      left: 12%;
+      background: var(--blue);
+      box-shadow: 0 0 10px 2px var(--blue);
+      animation-delay: 4s;
+      animation-duration: 12s;
+    }
+
+    .f-4 {
+      top: 800px;
+      right: 20%;
+      background: var(--pink);
+      box-shadow: 0 0 10px 2px var(--pink);
+      animation-delay: 6s;
+      animation-duration: 16s;
+    }
+
+    .f-5 {
+      bottom: 200px;
+      left: 25%;
+      background: var(--orange);
+      box-shadow: 0 0 10px 2px var(--orange);
+      animation-delay: 1s;
+      animation-duration: 22s;
+    }
+
+    [data-theme="light"] .firefly {
+      display: none !important;
+    }
 
     @keyframes firefly-float {
-      0%, 100% { transform: translate(0, 0); opacity: 0; }
-      20% { opacity: 0.8; }
-      25% { transform: translate(50px, -30px); opacity: 0.5; }
-      50% { transform: translate(10px, 40px); opacity: 0.1; }
-      70% { opacity: 0.9; }
-      75% { transform: translate(-40px, -10px); opacity: 0.4; }
+
+      0%,
+      100% {
+        transform: translate(0, 0);
+        opacity: 0;
+      }
+
+      20% {
+        opacity: 0.8;
+      }
+
+      25% {
+        transform: translate(50px, -30px);
+        opacity: 0.5;
+      }
+
+      50% {
+        transform: translate(10px, 40px);
+        opacity: 0.1;
+      }
+
+      70% {
+        opacity: 0.9;
+      }
+
+      75% {
+        transform: translate(-40px, -10px);
+        opacity: 0.4;
+      }
     }
 
     /* ── Sidebar ── */
@@ -355,6 +522,7 @@
       line-height: 1.1;
       margin-bottom: 0.3rem;
     }
+
     /* Highlighter effect */
     .name-hl {
       position: relative;
@@ -388,13 +556,20 @@
       margin-right: 6px;
       opacity: 0.7;
     }
+
     .section-icon svg {
-      width: 100%; height: 100%;
-      stroke: var(--green); fill: none;
-      stroke-width: 2; stroke-linecap: round; stroke-linejoin: round;
+      width: 100%;
+      height: 100%;
+      stroke: var(--green);
+      fill: none;
+      stroke-width: 2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
     }
 
-    .sidebar-section { margin-bottom: 2rem; }
+    .sidebar-section {
+      margin-bottom: 2rem;
+    }
 
     /* Section label with doodle underline */
     .sidebar-label {
@@ -406,20 +581,30 @@
       display: inline-block;
       position: relative;
     }
+
     .sidebar-label::after {
       content: '';
       position: absolute;
-      bottom: -2px; left: 0; right: 0;
+      bottom: -2px;
+      left: 0;
+      right: 0;
       height: 4px;
       background: url("data:image/svg+xml,%3Csvg viewBox='0 0 120 6' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 3Q6 0 12 3T24 3T36 3T48 3T60 3T72 3T84 3T96 3T108 3T120 3' fill='none' stroke='%237ee8b4' stroke-width='2.5' stroke-linecap='round'/%3E%3C/svg%3E") repeat-x;
       background-size: 60px 4px;
     }
+
     [data-theme="light"] .sidebar-label::after {
       background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 120 6' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 3Q6 0 12 3T24 3T36 3T48 3T60 3T72 3T84 3T96 3T108 3T120 3' fill='none' stroke='%232ea86a' stroke-width='2.5' stroke-linecap='round'/%3E%3C/svg%3E");
     }
 
-    .contact-list { list-style: none; }
-    .contact-list li { margin-bottom: 0.4rem; }
+    .contact-list {
+      list-style: none;
+    }
+
+    .contact-list li {
+      margin-bottom: 0.4rem;
+    }
+
     .contact-list a {
       color: var(--text-sec);
       text-decoration: none;
@@ -429,7 +614,11 @@
       align-items: center;
       gap: 0.4rem;
     }
-    .contact-list a:hover { color: var(--orange); }
+
+    .contact-list a:hover {
+      color: var(--orange);
+    }
+
     .contact-list .label {
       color: var(--text-dim);
       font-size: 0.75rem;
@@ -438,7 +627,11 @@
       flex-shrink: 0;
     }
 
-    .skills-list { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+    .skills-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+    }
 
     .skill {
       font-size: 0.8rem;
@@ -450,15 +643,28 @@
       transition: all 0.25s;
       background: var(--paper);
     }
+
     .skill:hover {
       border-color: var(--orange);
       color: var(--text);
       transform: rotate(-2deg) scale(1.08);
       box-shadow: 3px 3px 0px var(--shadow), 0 0 12px rgba(240, 168, 110, 0.25);
     }
-    .skill:nth-child(3n+1):hover { border-color: var(--green); box-shadow: 3px 3px 0px var(--shadow), 0 0 12px rgba(126, 232, 180, 0.25); }
-    .skill:nth-child(3n+2):hover { border-color: var(--blue); box-shadow: 3px 3px 0px var(--shadow), 0 0 12px rgba(124, 184, 224, 0.25); }
-    .skill:nth-child(3n):hover { border-color: var(--pink); box-shadow: 3px 3px 0px var(--shadow), 0 0 12px rgba(232, 135, 154, 0.25); }
+
+    .skill:nth-child(3n+1):hover {
+      border-color: var(--green);
+      box-shadow: 3px 3px 0px var(--shadow), 0 0 12px rgba(126, 232, 180, 0.25);
+    }
+
+    .skill:nth-child(3n+2):hover {
+      border-color: var(--blue);
+      box-shadow: 3px 3px 0px var(--shadow), 0 0 12px rgba(124, 184, 224, 0.25);
+    }
+
+    .skill:nth-child(3n):hover {
+      border-color: var(--pink);
+      box-shadow: 3px 3px 0px var(--shadow), 0 0 12px rgba(232, 135, 154, 0.25);
+    }
 
     .languages-text {
       font-size: 0.9rem;
@@ -467,8 +673,13 @@
     }
 
     /* ── Main ── */
-    .main { position: relative; }
-    .section { margin-bottom: 3rem; }
+    .main {
+      position: relative;
+    }
+
+    .section {
+      margin-bottom: 3rem;
+    }
 
     .section-title {
       font-family: 'Caveat', cursive;
@@ -480,15 +691,18 @@
       position: relative;
       display: inline-block;
     }
+
     .section-title::after {
       content: '';
       position: absolute;
-      bottom: 0; left: 0;
+      bottom: 0;
+      left: 0;
       width: 100%;
       height: 5px;
       background: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 6' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 3Q8 0 16 3T32 3T48 3T64 3T80 3T96 3T112 3T128 3T144 3T160 3T176 3T192 3T200 3' fill='none' stroke='%237ee8b4' stroke-width='2.5' stroke-linecap='round'/%3E%3C/svg%3E") repeat-x;
       background-size: 100px 5px;
     }
+
     [data-theme="light"] .section-title::after {
       background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 6' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 3Q8 0 16 3T32 3T48 3T64 3T80 3T96 3T112 3T128 3T144 3T160 3T176 3T192 3T200 3' fill='none' stroke='%232ea86a' stroke-width='2.5' stroke-linecap='round'/%3E%3C/svg%3E");
     }
@@ -501,7 +715,10 @@
     }
 
     /* ── Project Cards with Tape Effect ── */
-    .projects-grid { display: grid; gap: 1rem; }
+    .projects-grid {
+      display: grid;
+      gap: 1rem;
+    }
 
     .project {
       padding: 1.3rem 1.4rem;
@@ -511,6 +728,7 @@
       transition: all 0.22s;
       position: relative;
     }
+
     .project:hover {
       border-color: var(--green);
       transform: translateY(-3px) rotate(0deg) !important;
@@ -530,16 +748,19 @@
       border-radius: 2px;
       z-index: 4;
     }
+
     .project:nth-child(even)::before {
       left: auto;
       right: 40px;
       transform: rotate(3deg);
       background: rgba(124, 184, 224, 0.3);
     }
+
     .project:nth-child(3)::before {
       background: rgba(232, 216, 124, 0.3);
       transform: rotate(-1deg);
     }
+
     .project:nth-child(5)::before {
       background: rgba(176, 154, 224, 0.3);
       transform: rotate(2deg);
@@ -579,12 +800,18 @@
       line-height: 1.7;
       margin-bottom: 0.75rem;
     }
-    .project-desc ul { list-style: none; padding: 0; }
+
+    .project-desc ul {
+      list-style: none;
+      padding: 0;
+    }
+
     .project-desc li {
       padding-left: 1.1rem;
       position: relative;
       margin-bottom: 0.25rem;
     }
+
     .project-desc li::before {
       content: '▸';
       position: absolute;
@@ -595,9 +822,17 @@
     }
 
     /* Random slight tilt on each project for organic feel */
-    .project:nth-child(odd) { transform: rotate(0.4deg); }
-    .project:nth-child(even) { transform: rotate(-0.3deg); }
-    .project:nth-child(3) { transform: rotate(0.2deg); }
+    .project:nth-child(odd) {
+      transform: rotate(0.4deg);
+    }
+
+    .project:nth-child(even) {
+      transform: rotate(-0.3deg);
+    }
+
+    .project:nth-child(3) {
+      transform: rotate(0.2deg);
+    }
 
     .project-tech {
       display: flex;
@@ -605,6 +840,7 @@
       gap: 0.35rem;
       margin-bottom: 0.75rem;
     }
+
     .project-tech span {
       font-size: 0.75rem;
       font-weight: 700;
@@ -615,13 +851,18 @@
       border-radius: 15px 225px 15px 255px / 255px 15px 225px 15px;
       transition: all 0.2s;
     }
+
     .project-tech span:hover {
       border-color: var(--blue);
       color: var(--text-sec);
       transform: rotate(2deg);
     }
 
-    .project-links { display: flex; gap: 0.9rem; }
+    .project-links {
+      display: flex;
+      gap: 0.9rem;
+    }
+
     .project-links a {
       font-size: 0.85rem;
       font-weight: 700;
@@ -631,11 +872,16 @@
       border-bottom: 2.5px dashed var(--green);
       padding-bottom: 1px;
     }
+
     .project-links a:hover {
       color: var(--orange);
       border-color: var(--orange);
     }
-    .project-links a::after { content: ' ↗'; font-size: 0.72rem; }
+
+    .project-links a::after {
+      content: ' ↗';
+      font-size: 0.72rem;
+    }
 
     /* ── Education ── */
     .edu-item {
@@ -646,16 +892,22 @@
       position: relative;
       transition: all 0.2s;
     }
+
     .edu-item::before {
       content: '';
       position: absolute;
-      top: -6px; left: 50px;
-      width: 55px; height: 14px;
+      top: -6px;
+      left: 50px;
+      width: 55px;
+      height: 14px;
       background: rgba(232, 135, 154, 0.3);
       transform: rotate(1deg);
       border-radius: 2px;
     }
-    .edu-item:hover { box-shadow: 3px 3px 0px var(--shadow); }
+
+    .edu-item:hover {
+      box-shadow: 3px 3px 0px var(--shadow);
+    }
 
     /* About text with a scribble bracket */
     .about-bracket {
@@ -663,27 +915,42 @@
       padding-left: 1rem;
       position: relative;
     }
+
     .about-bracket::before {
       content: '';
       position: absolute;
-      left: -7px; top: -4px;
-      width: 14px; height: 14px;
+      left: -7px;
+      top: -4px;
+      width: 14px;
+      height: 14px;
       border-top: 3px solid var(--green);
       border-left: 3px solid var(--green);
       border-radius: 6px 0 0 0;
     }
+
     .about-bracket::after {
       content: '';
       position: absolute;
-      left: -7px; bottom: -4px;
-      width: 14px; height: 14px;
+      left: -7px;
+      bottom: -4px;
+      width: 14px;
+      height: 14px;
       border-bottom: 3px solid var(--green);
       border-left: 3px solid var(--green);
       border-radius: 0 0 0 6px;
     }
 
-    .edu-degree { font-family: 'Caveat', cursive; font-size: 1.25rem; font-weight: 700; }
-    .edu-school { font-size: 0.88rem; color: var(--text-sec); }
+    .edu-degree {
+      font-family: 'Caveat', cursive;
+      font-size: 1.25rem;
+      font-weight: 700;
+    }
+
+    .edu-school {
+      font-size: 0.88rem;
+      color: var(--text-sec);
+    }
+
     .edu-year {
       font-size: 0.82rem;
       color: var(--orange);
@@ -692,7 +959,13 @@
     }
 
     /* ── Coursework ── */
-    .coursework-list { list-style: none; display: flex; flex-wrap: wrap; gap: 0.4rem; }
+    .coursework-list {
+      list-style: none;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+    }
+
     .coursework-item {
       font-size: 0.8rem;
       font-weight: 700;
@@ -703,7 +976,12 @@
       background: var(--paper);
       transition: all 0.2s;
     }
-    .coursework-item:hover { border-color: var(--blue); transform: rotate(2deg); }
+
+    .coursework-item:hover {
+      border-color: var(--blue);
+      transform: rotate(2deg);
+    }
+
     .coursework-item.current {
       border-color: var(--green);
       color: var(--text);
@@ -722,7 +1000,8 @@
     /* ── Export Button — Sticker ── */
     .export-btn {
       position: fixed;
-      bottom: 1.8rem; right: 1.8rem;
+      bottom: 1.8rem;
+      right: 1.8rem;
       z-index: 100;
       display: inline-flex;
       align-items: center;
@@ -740,78 +1019,200 @@
       transform: rotate(3deg);
       transition: all 0.22s;
     }
+
     .export-btn:hover {
       background: var(--green);
       transform: translateY(-3px) rotate(-2deg);
       box-shadow: 6px 6px 0px var(--shadow);
     }
+
     .export-btn svg {
-      width: 18px; height: 18px;
-      stroke: currentColor; fill: none;
-      stroke-width: 2.5; stroke-linecap: round; stroke-linejoin: round;
+      width: 18px;
+      height: 18px;
+      stroke: currentColor;
+      fill: none;
+      stroke-width: 2.5;
+      stroke-linecap: round;
+      stroke-linejoin: round;
     }
 
     .footer-badge {
       position: fixed;
-      bottom: 1.5rem; left: 1.5rem;
+      bottom: 1.5rem;
+      left: 1.5rem;
       font-size: 0.65rem;
       color: var(--text-dim);
     }
 
     /* ── Responsive ── */
     @media (max-width: 900px) {
-      .section { opacity: 1; transform: none; }
+      .section {
+        opacity: 1;
+        transform: none;
+      }
+
       .page-content {
         grid-template-columns: 1fr;
         gap: 2.5rem;
         padding: calc(var(--nav-h) + 1.5rem) 1.5rem 3rem;
       }
-      .sidebar { position: static; }
-      .name { font-size: 2.2rem; }
-      body { cursor: auto; }
-      *, *::before, *::after { cursor: auto !important; }
-      a, button { cursor: pointer !important; }
-      .cursor-pen { display: none !important; }
-      .footer-badge { position: static; padding: 2rem 0 1rem; text-align: center; }
+
+      .sidebar {
+        position: static;
+      }
+
+      .name {
+        font-size: 2.2rem;
+      }
+
+      body {
+        cursor: auto;
+      }
+
+      *,
+      *::before,
+      *::after {
+        cursor: auto !important;
+      }
+
+      a,
+      button {
+        cursor: pointer !important;
+      }
+
+      .cursor-pen {
+        display: none !important;
+      }
+
+      .footer-badge {
+        position: static;
+        padding: 2rem 0 1rem;
+        text-align: center;
+      }
+
       .nav-links {
         display: none;
         position: absolute;
         top: var(--nav-h);
-        left: 0; right: 0;
+        left: 0;
+        right: 0;
         flex-direction: column;
         background: var(--nav-bg);
         backdrop-filter: blur(16px);
         border-bottom: 3px solid var(--border);
         padding: 0.5rem;
       }
-      .nav-links.open { display: flex; }
-      .nav-links a { padding: 0.6rem 1rem; font-size: 0.9rem; }
-      .nav-hamburger { display: block; }
-      .doodle { display: none; }
+
+      .nav-links.open {
+        display: flex;
+      }
+
+      .nav-links a {
+        padding: 0.6rem 1rem;
+        font-size: 0.9rem;
+      }
+
+      .nav-hamburger {
+        display: block;
+      }
+
+      .doodle {
+        display: none;
+      }
     }
 
     @media (max-width: 480px) {
-      .page-content { padding: calc(var(--nav-h) + 1rem) 1rem 2rem; }
-      .project { padding: 1rem; }
-      .name { font-size: 1.8rem; }
+      .page-content {
+        padding: calc(var(--nav-h) + 1rem) 1rem 2rem;
+      }
+
+      .project {
+        padding: 1rem;
+      }
+
+      .name {
+        font-size: 1.8rem;
+      }
     }
 
     /* ── Print ── */
     @media print {
-      * { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
-      html, body { background: #fff !important; color: #111 !important; cursor: auto !important; font-size: 10px; }
-      .cursor-pen,.footer-badge,.export-btn,.navbar,.doodle,.squiggly-divider { display: none !important; }
-      .page-content { max-width:100%;padding:0.5cm;gap:1.5rem;grid-template-columns:220px 1fr; }
-      .sidebar { position: static; }
-      .project { break-inside:avoid;page-break-inside:avoid;padding:0.7rem;transform:none!important; }
-      .project::before { display: none; }
-      .edu-item::before { display: none; }
-      .project:hover, .edu-item:hover { transform:none!important;box-shadow:none; }
-      .project-links a::after { content: none; }
-      .section-title::after { display: none; }
-      .about-bracket { border:none; padding-left:0; }
-      .about-bracket::before, .about-bracket::after { display: none; }
-      @page { size: A4; margin: 1cm; }
+      * {
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+      }
+
+      html,
+      body {
+        background: #fff !important;
+        color: #111 !important;
+        cursor: auto !important;
+        font-size: 10px;
+      }
+
+      .cursor-pen,
+      .footer-badge,
+      .export-btn,
+      .navbar,
+      .doodle,
+      .squiggly-divider {
+        display: none !important;
+      }
+
+      .page-content {
+        max-width: 100%;
+        padding: 0.5cm;
+        gap: 1.5rem;
+        grid-template-columns: 220px 1fr;
+      }
+
+      .sidebar {
+        position: static;
+      }
+
+      .project {
+        break-inside: avoid;
+        page-break-inside: avoid;
+        padding: 0.7rem;
+        transform: none !important;
+      }
+
+      .project::before {
+        display: none;
+      }
+
+      .edu-item::before {
+        display: none;
+      }
+
+      .project:hover,
+      .edu-item:hover {
+        transform: none !important;
+        box-shadow: none;
+      }
+
+      .project-links a::after {
+        content: none;
+      }
+
+      .section-title::after {
+        display: none;
+      }
+
+      .about-bracket {
+        border: none;
+        padding-left: 0;
+      }
+
+      .about-bracket::before,
+      .about-bracket::after {
+        display: none;
+      }
+
+      @page {
+        size: A4;
+        margin: 1cm;
+      }
     }
   </style>
 </head>
@@ -820,12 +1221,12 @@
   <!-- Pencil cursor — tip at origin -->
   <div class="cursor-pen" id="cursorPen">
     <svg viewBox="-2 -24 28 28" xmlns="http://www.w3.org/2000/svg">
-      <path d="M0 0 L3 -5 L5.5 -1.5 Z" fill="var(--orange)" stroke="var(--text)" stroke-width="0.6"/>
-      <line x1="3" y1="-5" x2="17" y2="-19" stroke="var(--yellow)" stroke-width="4.5" stroke-linecap="round"/>
-      <line x1="3" y1="-5" x2="17" y2="-19" stroke="var(--orange)" stroke-width="1.5" stroke-linecap="round"/>
-      <line x1="15.5" y1="-17.5" x2="18" y2="-20" stroke="var(--border)" stroke-width="5" stroke-linecap="butt"/>
-      <line x1="18" y1="-20" x2="20" y2="-22" stroke="var(--pink)" stroke-width="4.5" stroke-linecap="round"/>
-      <circle cx="0" cy="0" r="1.5" fill="var(--text)" opacity="0.7"/>
+      <path d="M0 0 L3 -5 L5.5 -1.5 Z" fill="var(--orange)" stroke="var(--text)" stroke-width="0.6" />
+      <line x1="3" y1="-5" x2="17" y2="-19" stroke="var(--yellow)" stroke-width="4.5" stroke-linecap="round" />
+      <line x1="3" y1="-5" x2="17" y2="-19" stroke="var(--orange)" stroke-width="1.5" stroke-linecap="round" />
+      <line x1="15.5" y1="-17.5" x2="18" y2="-20" stroke="var(--border)" stroke-width="5" stroke-linecap="butt" />
+      <line x1="18" y1="-20" x2="20" y2="-22" stroke="var(--pink)" stroke-width="4.5" stroke-linecap="round" />
+      <circle cx="0" cy="0" r="1.5" fill="var(--text)" opacity="0.7" />
     </svg>
   </div>
 
@@ -835,11 +1236,27 @@
       <a href="#" class="nav-brand">GR</a>
       <div style="display: flex; align-items: center; gap: 0.6rem;">
         <button id="themeToggle" class="theme-toggle" aria-label="Toggle Theme">
-          <svg id="moon-icon" viewBox="0 0 24 24" style="display: none;"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
-          <svg id="sun-icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
+          <svg id="moon-icon" viewBox="0 0 24 24" style="display: none;">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+          </svg>
+          <svg id="sun-icon" viewBox="0 0 24 24">
+            <circle cx="12" cy="12" r="5"></circle>
+            <line x1="12" y1="1" x2="12" y2="3"></line>
+            <line x1="12" y1="21" x2="12" y2="23"></line>
+            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+            <line x1="1" y1="12" x2="3" y2="12"></line>
+            <line x1="21" y1="12" x2="23" y2="12"></line>
+            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+          </svg>
         </button>
         <button class="nav-hamburger" id="navToggle" aria-label="Toggle navigation">
-          <svg viewBox="0 0 24 24"><line x1="4" y1="6" x2="20" y2="6"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="18" x2="20" y2="18"/></svg>
+          <svg viewBox="0 0 24 24">
+            <line x1="4" y1="6" x2="20" y2="6" />
+            <line x1="4" y1="12" x2="20" y2="12" />
+            <line x1="4" y1="18" x2="20" y2="18" />
+          </svg>
         </button>
       </div>
       <ul class="nav-links" id="navLinks">
@@ -854,12 +1271,37 @@
   <div class="page-content">
 
     <!-- Doodle decorations in the margins -->
-    <div class="doodle d-star"><svg width="44" height="44" viewBox="0 0 44 44"><path d="M22 2L26 16L40 16L29 24L33 40L22 30L11 40L15 24L4 16L18 16Z"/></svg></div>
-    <div class="doodle d-swirl"><svg width="48" height="48" viewBox="0 0 48 48"><path d="M24 24Q30 18 27 12Q24 4 16 10Q8 16 14 24Q20 34 32 28Q42 20 34 10Q26 0 14 8"/></svg></div>
-    <div class="doodle d-arrow"><svg width="56" height="26" viewBox="0 0 56 26"><path d="M4 13Q14 3 28 13T52 13"/><path d="M45 7L52 13L45 19"/></svg></div>
-    <div class="doodle d-heart"><svg width="36" height="36" viewBox="0 0 36 36"><path d="M18 30 Q4 20 4 12 Q4 4 12 4 Q18 4 18 12 Q18 4 24 4 Q32 4 32 12 Q32 20 18 30Z"/></svg></div>
-    <div class="doodle d-bulb"><svg width="40" height="52" viewBox="0 0 40 52"><circle cx="20" cy="18" r="14"/><path d="M14 32L26 32"/><path d="M15 36L25 36"/><path d="M17 40L23 40"/><path d="M20 4V0"/><path d="M6 8L2 4"/><path d="M34 8L38 4"/><path d="M2 18H0"/><path d="M40 18H38"/></svg></div>
-    <div class="doodle d-coffee"><svg width="42" height="42" viewBox="0 0 42 42"><path d="M6 16H30V34Q30 40 18 40Q6 40 6 34Z"/><path d="M30 20H36Q40 20 40 26Q40 32 36 32H30"/><path d="M12 12Q12 6 14 4"/><path d="M18 12Q18 6 20 4"/><path d="M24 12Q24 6 26 4"/></svg></div>
+    <div class="doodle d-star"><svg width="44" height="44" viewBox="0 0 44 44">
+        <path d="M22 2L26 16L40 16L29 24L33 40L22 30L11 40L15 24L4 16L18 16Z" />
+      </svg></div>
+    <div class="doodle d-swirl"><svg width="48" height="48" viewBox="0 0 48 48">
+        <path d="M24 24Q30 18 27 12Q24 4 16 10Q8 16 14 24Q20 34 32 28Q42 20 34 10Q26 0 14 8" />
+      </svg></div>
+    <div class="doodle d-arrow"><svg width="56" height="26" viewBox="0 0 56 26">
+        <path d="M4 13Q14 3 28 13T52 13" />
+        <path d="M45 7L52 13L45 19" />
+      </svg></div>
+    <div class="doodle d-heart"><svg width="36" height="36" viewBox="0 0 36 36">
+        <path d="M18 30 Q4 20 4 12 Q4 4 12 4 Q18 4 18 12 Q18 4 24 4 Q32 4 32 12 Q32 20 18 30Z" />
+      </svg></div>
+    <div class="doodle d-bulb"><svg width="40" height="52" viewBox="0 0 40 52">
+        <circle cx="20" cy="18" r="14" />
+        <path d="M14 32L26 32" />
+        <path d="M15 36L25 36" />
+        <path d="M17 40L23 40" />
+        <path d="M20 4V0" />
+        <path d="M6 8L2 4" />
+        <path d="M34 8L38 4" />
+        <path d="M2 18H0" />
+        <path d="M40 18H38" />
+      </svg></div>
+    <div class="doodle d-coffee"><svg width="42" height="42" viewBox="0 0 42 42">
+        <path d="M6 16H30V34Q30 40 18 40Q6 40 6 34Z" />
+        <path d="M30 20H36Q40 20 40 26Q40 32 36 32H30" />
+        <path d="M12 12Q12 6 14 4" />
+        <path d="M18 12Q18 6 20 4" />
+        <path d="M24 12Q24 6 26 4" />
+      </svg></div>
 
     <!-- Fireflies (Only visible in Dark Mode) -->
     <div class="firefly f-1"></div>
@@ -868,56 +1310,62 @@
     <div class="firefly f-4"></div>
     <div class="firefly f-5"></div>
 
-      <!-- Sidebar -->
-      <aside class="sidebar">
-        <h1 class="name"><span class="name-hl">Gauravsingh</span><br><span class="name-hl">Rajpurohit</span></h1>
-        <p class="role">Software Engineer · Full Stack Developer</p>
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <h1 class="name"><span class="name-hl">Gauravsingh</span><br><span class="name-hl">Rajpurohit</span></h1>
+      <p class="role">Software Engineer · Full Stack Developer</p>
 
-        <div class="sidebar-section">
-          <p class="sidebar-label">Contact</p>
-          <ul class="contact-list">
-            <li><a href="mailto:gauravrajpurohit2006@gmail.com"><span class="label">Email</span> gauravrajpurohit2006@gmail.com</a></li>
-            <li><a href="tel:+917506631555"><span class="label">Phone</span> 7506631555</a></li>
-            <li><a href="https://github.com/GauravHmm" target="_blank" rel="noopener"><span class="label">GitHub</span> GauravHmm</a></li>
-            <li><a href="https://www.linkedin.com/in/gauravsingh-rajpurohit-47409332b" target="_blank" rel="noopener"><span class="label">LinkedIn</span> gauravsingh-rajpurohit</a></li>
-            <li>
-              <span class="label" style="color:var(--text-dim);font-size:0.75rem;font-weight:700">Location</span>
-              <span style="font-size:0.85rem;color:var(--text-sec)">Vellore, Tamil Nadu</span>
-            </li>
-          </ul>
-        </div>
+      <div class="sidebar-section">
+        <p class="sidebar-label">Contact</p>
+        <ul class="contact-list">
+          <li><a href="mailto:gauravrajpurohit2006@gmail.com"><span class="label">Email</span>
+              gauravrajpurohit2006@gmail.com</a></li>
+          <li><a href="tel:+917506631555"><span class="label">Phone</span> 7506631555</a></li>
+          <li><a href="https://github.com/GauravHmm" target="_blank" rel="noopener"><span class="label">GitHub</span>
+              GauravHmm</a></li>
+          <li><a href="https://www.linkedin.com/in/gauravsingh-rajpurohit-47409332b" target="_blank"
+              rel="noopener"><span class="label">LinkedIn</span> gauravsingh-rajpurohit</a></li>
+          <li>
+            <span class="label" style="color:var(--text-dim);font-size:0.75rem;font-weight:700">Location</span>
+            <span style="font-size:0.85rem;color:var(--text-sec)">Vellore, Tamil Nadu</span>
+          </li>
+        </ul>
+      </div>
 
-        <div class="sidebar-section">
-          <p class="sidebar-label">Skills</p>
-          <div class="skills-list">
-            <span class="skill">Python</span>
-            <span class="skill">C++</span>
-            <span class="skill">JavaScript</span>
-            <span class="skill">TypeScript</span>
-            <span class="skill">React</span>
-            <span class="skill">Next.js</span>
-            <span class="skill">Node.js</span>
-            <span class="skill">FastAPI</span>
-            <span class="skill">Flask</span>
-            <span class="skill">Tailwind CSS</span>
-            <span class="skill">OOP</span>
-            <span class="skill">DSA</span>
-            <span class="skill">Git</span>
-            <span class="skill">Linux</span>
-            <span class="skill">SVG / Canvas</span>
-          </div>
+      <div class="sidebar-section">
+        <p class="sidebar-label">Skills</p>
+        <div class="skills-list">
+          <span class="skill">Python</span>
+          <span class="skill">C++</span>
+          <span class="skill">JavaScript</span>
+          <span class="skill">TypeScript</span>
+          <span class="skill">React</span>
+          <span class="skill">Next.js</span>
+          <span class="skill">Node.js</span>
+          <span class="skill">FastAPI</span>
+          <span class="skill">Flask</span>
+          <span class="skill">Tailwind CSS</span>
+          <span class="skill">OOP</span>
+          <span class="skill">DSA</span>
+          <span class="skill">Git</span>
+          <span class="skill">Linux</span>
+          <span class="skill">SVG / Canvas</span>
         </div>
+      </div>
 
-        <div class="sidebar-section">
-          <p class="sidebar-label">Languages</p>
-          <p class="languages-text">English · Hindi · French</p>
-        </div>
-      </aside>
+      <div class="sidebar-section">
+        <p class="sidebar-label">Languages</p>
+        <p class="languages-text">English · Hindi · French</p>
+      </div>
+    </aside>
 
     <!-- Main -->
     <main class="main">
       <section class="section" id="about">
-        <h2 class="section-title"><span class="section-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 4-6 8-6s8 2 8 6"/></svg></span>About</h2>
+        <h2 class="section-title"><span class="section-icon"><svg viewBox="0 0 24 24">
+              <circle cx="12" cy="8" r="4" />
+              <path d="M4 20c0-4 4-6 8-6s8 2 8 6" />
+            </svg></span>About</h2>
         <div class="about-bracket">
           <p class="about-text">
             Third-year Computer Science student at VIT with strong foundations in programming,
@@ -933,103 +1381,119 @@
       <div class="squiggly-divider"></div>
 
       <section class="section" id="projects">
-        <h2 class="section-title"><span class="section-icon"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg></span>Projects</h2>
-          <div class="projects-grid">
+        <h2 class="section-title"><span class="section-icon"><svg viewBox="0 0 24 24">
+              <rect x="3" y="3" width="7" height="7" rx="1" />
+              <rect x="14" y="3" width="7" height="7" rx="1" />
+              <rect x="3" y="14" width="7" height="7" rx="1" />
+              <rect x="14" y="14" width="7" height="7" rx="1" />
+            </svg></span>Projects</h2>
+        <div class="projects-grid">
 
-            <div class="project">
-              <div class="project-top">
-                <h3 class="project-name">PRP Indoor Navigation System</h3>
-                <span class="featured-tag">Featured</span>
-              </div>
-              <div class="project-desc">
-                <ul>
-                  <li>Built a scalable, cloud-deployable web-based indoor navigation system for a multi-block academic building using graph algorithms and object-oriented design principles.</li>
-                  <li>Implemented A* for shortest path and Dijkstra for nearest facility search, demonstrating strong algorithmic problem-solving and debugging skills.</li>
-                  <li>Designed an intuitive UI/UX with interactive SVG maps featuring zoom, pan, and multi-floor navigation for an engaging user experience.</li>
-                  <li>Deployed to Vercel cloud with CI/CD pipeline.</li>
-                </ul>
-              </div>
-              <div class="project-tech">
-                <span>Next.js</span><span>TypeScript</span><span>A*</span><span>Dijkstra</span><span>SVG</span><span>Tailwind CSS</span>
-              </div>
-              <div class="project-links">
-                <a href="https://prp-indoor-navigation.vercel.app/navigation" target="_blank" rel="noopener">Live Demo</a>
-                <a href="https://github.com/GauravHmm/PRP-Indoor-Navigation" target="_blank" rel="noopener">Source Code</a>
-              </div>
+          <div class="project">
+            <div class="project-top">
+              <h3 class="project-name">PRP Indoor Navigation System</h3>
+              <span class="featured-tag">Featured</span>
             </div>
-
-            <div class="project">
-              <div class="project-top">
-                <h3 class="project-name">InsightRush</h3>
-                <span class="featured-tag">Hackathon</span>
-              </div>
-              <div class="project-desc">
-                <ul>
-                  <li>Developed backend APIs for CSV ingestion and analytical query execution in a hackathon project.</li>
-                  <li>Implemented schema and query validation to ensure safe and consistent data processing.</li>
-                  <li>Built an approximate query-processing pipeline using sampling and statistical estimation for COUNT, SUM, and AVG operations.</li>
-                  <li>Collaborated with frontend to design API responses including execution metadata and results.</li>
-                </ul>
-              </div>
-              <div class="project-tech">
-                <span>FastAPI</span><span>DuckDB</span><span>Python</span><span>Data Processing</span>
-              </div>
+            <div class="project-desc">
+              <ul>
+                <li>Built a scalable, cloud-deployable web-based indoor navigation system for a multi-block academic
+                  building using graph algorithms and object-oriented design principles.</li>
+                <li>Implemented A* for shortest path and Dijkstra for nearest facility search, demonstrating strong
+                  algorithmic problem-solving and debugging skills.</li>
+                <li>Designed an intuitive UI/UX with interactive SVG maps featuring zoom, pan, and multi-floor
+                  navigation for an engaging user experience.</li>
+                <li>Deployed to Vercel cloud with CI/CD pipeline.</li>
+              </ul>
             </div>
-
-            <div class="project">
-              <div class="project-top">
-                <h3 class="project-name">Lumi</h3>
-              </div>
-              <div class="project-desc">
-                <ul>
-                  <li>Built a full-stack Flask application with SQLite-backed data models for health & productivity tracking.</li>
-                  <li>Implemented EMA-based habit tracking for consistency scoring.</li>
-                  <li>Developed server-side chart generation using Matplotlib with Base64 rendering.</li>
-                  <li>Integrated AI-based routine analysis with fallback logic for reliability.</li>
-                </ul>
-              </div>
-              <div class="project-tech">
-                <span>Python</span><span>Flask</span><span>SQLite</span><span>Matplotlib</span><span>LLM Integration</span>
-              </div>
+            <div class="project-tech">
+              <span>Next.js</span><span>TypeScript</span><span>A*</span><span>Dijkstra</span><span>SVG</span><span>Tailwind
+                CSS</span>
             </div>
-
-            <div class="project">
-              <div class="project-top">
-                <h3 class="project-name">6502 Emulator</h3>
-              </div>
-              <div class="project-desc">
-                <ul>
-                  <li>Built a software emulator for the MOS 6502 microprocessor in Python.</li>
-                  <li>Implemented instruction decoding, memory mapping, and CPU cycle emulation.</li>
-                </ul>
-              </div>
-              <div class="project-tech">
-                <span>Python</span><span>Systems Programming</span>
-              </div>
+            <div class="project-links">
+              <a href="https://prp-indoor-navigation.vercel.app/navigation" target="_blank" rel="noopener">Live Demo</a>
+              <a href="https://github.com/GauravHmm/PRP-Indoor-Navigation" target="_blank" rel="noopener">Source
+                Code</a>
             </div>
-
-            <div class="project">
-              <div class="project-top">
-                <h3 class="project-name">Keyboard-lock</h3>
-              </div>
-              <div class="project-desc">
-                <ul>
-                  <li>Utility tool providing Fn lock and arrow key lock functionality for 60% keyboard users.</li>
-                  <li>Improves workflow efficiency for compact keyboard layouts.</li>
-                </ul>
-              </div>
-              <div class="project-tech">
-                <span>Utility</span><span>Keyboard Remapping</span>
-              </div>
-            </div>
-
           </div>
+
+          <div class="project">
+            <div class="project-top">
+              <h3 class="project-name">InsightRush</h3>
+              <span class="featured-tag">Hackathon</span>
+            </div>
+            <div class="project-desc">
+              <ul>
+                <li>Developed backend APIs for CSV ingestion and analytical query execution in a hackathon project.</li>
+                <li>Implemented schema and query validation to ensure safe and consistent data processing.</li>
+                <li>Built an approximate query-processing pipeline using sampling and statistical estimation for COUNT,
+                  SUM, and AVG operations.</li>
+                <li>Collaborated with frontend to design API responses including execution metadata and results.</li>
+              </ul>
+            </div>
+            <div class="project-tech">
+              <span>FastAPI</span><span>DuckDB</span><span>Python</span><span>Data Processing</span>
+            </div>
+          </div>
+
+          <div class="project">
+            <div class="project-top">
+              <h3 class="project-name">Lumi</h3>
+            </div>
+            <div class="project-desc">
+              <ul>
+                <li>Built a full-stack Flask application with SQLite-backed data models for health & productivity
+                  tracking.</li>
+                <li>Implemented EMA-based habit tracking for consistency scoring.</li>
+                <li>Developed server-side chart generation using Matplotlib with Base64 rendering.</li>
+                <li>Integrated AI-based routine analysis with fallback logic for reliability.</li>
+              </ul>
+            </div>
+            <div class="project-tech">
+              <span>Python</span><span>Flask</span><span>SQLite</span><span>Matplotlib</span><span>LLM
+                Integration</span>
+            </div>
+          </div>
+
+          <div class="project">
+            <div class="project-top">
+              <h3 class="project-name">6502 Emulator</h3>
+            </div>
+            <div class="project-desc">
+              <ul>
+                <li>Built a software emulator for the MOS 6502 microprocessor in Python.</li>
+                <li>Implemented instruction decoding, memory mapping, and CPU cycle emulation.</li>
+              </ul>
+            </div>
+            <div class="project-tech">
+              <span>Python</span><span>Systems Programming</span>
+            </div>
+          </div>
+
+          <div class="project">
+            <div class="project-top">
+              <h3 class="project-name">Keyboard-lock</h3>
+            </div>
+            <div class="project-desc">
+              <ul>
+                <li>Utility tool providing Fn lock and arrow key lock functionality for 60% keyboard users.</li>
+                <li>Improves workflow efficiency for compact keyboard layouts.</li>
+              </ul>
+            </div>
+            <div class="project-tech">
+              <span>Utility</span><span>Keyboard Remapping</span>
+            </div>
+          </div>
+
+        </div>
       </section>
 
       <div class="squiggly-divider"></div>
 
       <section class="section" id="education">
-        <h2 class="section-title"><span class="section-icon"><svg viewBox="0 0 24 24"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg></span>Education</h2>
+        <h2 class="section-title"><span class="section-icon"><svg viewBox="0 0 24 24">
+              <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z" />
+              <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z" />
+            </svg></span>Education</h2>
         <div class="edu-item">
           <p class="edu-degree">B.Tech in Computer Science and Engineering</p>
           <p class="edu-school">Vellore Institute of Technology (VIT), Vellore</p>
@@ -1040,23 +1504,27 @@
       <div class="squiggly-divider"></div>
 
       <section class="section" id="coursework">
-        <h2 class="section-title"><span class="section-icon"><svg viewBox="0 0 24 24"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg></span>Relevant Coursework</h2>
-          <span class="coursework-label">Completed</span>
-          <div class="coursework-list" style="margin-bottom: 0.75rem;">
-            <span class="coursework-item">Data Structures & Algorithms</span>
-            <span class="coursework-item">Object-Oriented Programming</span>
-            <span class="coursework-item">Discrete Mathematics</span>
-          </div>
-          <span class="coursework-label">Currently Enrolled</span>
-          <div class="coursework-list">
-            <span class="coursework-item current">Operating Systems</span>
-            <span class="coursework-item current">Computer Networks</span>
-          </div>
+        <h2 class="section-title"><span class="section-icon"><svg viewBox="0 0 24 24">
+              <polyline points="9 11 12 14 22 4" />
+              <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11" />
+            </svg></span>Relevant Coursework</h2>
+        <span class="coursework-label">Completed</span>
+        <div class="coursework-list" style="margin-bottom: 0.75rem;">
+          <span class="coursework-item">Data Structures & Algorithms</span>
+          <span class="coursework-item">Object-Oriented Programming</span>
+          <span class="coursework-item">Discrete Mathematics</span>
+        </div>
+        <span class="coursework-label">Currently Enrolled</span>
+        <div class="coursework-list">
+          <span class="coursework-item current">Operating Systems</span>
+          <span class="coursework-item current">Computer Networks</span>
+        </div>
       </section>
     </main>
   </div>
 
-  <a class="export-btn" href="resume.html" target="_blank" title="View formatted resume">
+  <a class="export-btn" href="https://drive.google.com/file/d/1FmHcdJxNzlHT7QiOSN1S4kgu1VUcrrQU/view?usp=sharing"
+    target="_blank" title="View formatted resume">
     <svg viewBox="0 0 24 24">
       <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
       <polyline points="14 2 14 8 20 8" />
